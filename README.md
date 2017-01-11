@@ -12,16 +12,17 @@ This graph is the famous hockey stick graph. It shows that the amount of CO2 in 
 ### Visualization 3 - line graph: GDP and CO2 emission
 This line graph will hold data for one specific country. It will contain a line graph showing the GDP per capita over the years and CO2 emission per capita over the years. The goal of this graph is to find out if there is any correlation in growth of a country and the amount CO2 it emits.
 
-### Visualization 4 - line graph: Forest area and urban population
-By plotting the amount of forest in a country and the amount of people living in urban places in a country, a correlation might be found in deforestation and people leaving rural areas to live in urban areas. Both datasets are in percentages of total.
+### Visualization 4 - bar chart: GHG emissions per GDP
+To visualize if money being spend in a country is used in a polluting way, the GHG emission per GDP is visualized in a bar chart.
 
-### Visualization 5 - pie chart: Energy sources
-To show the user what kind of energy is produced, the viewer can select a country and see in a pie chart what percentage of the country's energy consumption is produced from which source. This includes among others sources such as coal, gas, wind, solar, hydroelectric, etc.
-
-### Visualization 6 - line graph: Average temperature change
+### Visualization 5 - line graph: Average temperature change
 To show how the temperature changed through the years, the average temperature change per country is shown in a line graph. The data shown in this graph is initialized on the global temperature change and can be changed to the dataset of a specific country.
 
 ## Data
-All data needed is available by the World Bank. This will be converted from CSV to JSON using a python script. The visualizations will be made using JS/D3. This will allow for interactivity and basic styling using HTML and CSS.
+Data has been obtained from the World Bank, the World Recourses Institute and Berkeley Earth. This will be converted from CSV to JSON using a python script. The visualizations will be made using JS/D3. This will allow for interactivity and basic styling using HTML and CSS.
 
-A concept visualization can be found in the documentation folder.
+## GUI
+A concept of the GUI can be found here.
+![Alt text](/doc/title_page_v1.jpg)
+![Alt text](/doc/CO2_emission_page_v2.jpg)
+![Alt text](/doc/GDP_CO2_page_v2.jpg)
