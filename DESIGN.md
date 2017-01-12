@@ -11,3 +11,39 @@ The next page will link welfare of a country to GHG emission. Two lines will be 
 
 ### Optional
 Optionally, more visualizations can be added containing data on the source of energy production. These can be obtained from the World Bank.
+
+### JSON
+The JSON for the page with the world map will look as follows.
+```
+{
+    "1990": [{
+            "code": "DZA",
+            "name": "Algeria",
+            "GHG": "150000",
+            "CO2": "3000",
+            ...
+        },
+        {
+            "code": "CUB",
+            "name": "Cuba",
+            ...,
+            "waste": "4000"
+        }
+    ],
+    ...,
+    "2012": [{
+            "code": "DZA",
+            "name": "Algeria",
+            "GHG": "300000",
+            "CO2": "30000",
+            ...
+        },
+        {
+            "code": "CUB",
+            "name": "Cuba",
+            ...,
+            "waste": "5000"
+        }
+    ]
+}
+```
