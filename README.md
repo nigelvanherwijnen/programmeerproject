@@ -6,7 +6,7 @@ Climate change is a hot topic in modern society. Because of this, a lot of data 
 ### Visualization 1 - line graph: CO2 levels (over thousands of years)
 This graph is the famous hockey stick graph. It shows that the amount of CO2 in the atmosphere is not due to natural causes, but as a result of the industrialization.
 
-### Visualization 2 - world map: Total GHG emission
+### Visualization 2 - world map: GHG emission per capita
 This world map will be a datamap visualizing the emission per country. By using a gradial colour scheme, the user will be able to see how much a country emits with respect to other countries. Data in this graph will be available for several years, which can be changed using a slider.
 
 ### Visualization 3 - line graph: Emission by sector
