@@ -1,7 +1,7 @@
 # Process book
 
 ## Day 1 - 09/01/2017
-On the first day, the first version of the concept plan had been made and the readme had been constructed.
+On the first day, the first version of the concept plan had been made and the README had been constructed.
 
 ## Day 2 - 10/01/2017
 One of the problems in the first version of the concept plan was that a story was missing. This was partly because there were too many graphs on a single page. It was too chaotic. This is resolved by creating multiple pages. The homepage will be an eye catcher with the hockey stick graph and some general information. A second page will include a map showing CO2 emissions per country, a ranking of the countries of these emissions and a line graph visualizing the average temperature over the years of a specific country.
@@ -12,5 +12,5 @@ The last page will include information on the way energy is produced. This means
 The new plan has been elaborated today and the design document has been made.
 
 ## Day 4 - 12/01/2017
-Today I have planned to have all data collected. I have found out that the datasets for GHG emissions per GDP, GHG emission per capita are not available, but will have to be calculated. This will have to be done by converting multiple CSV's from different sets into one JSON set.
+Today I have planned to have all data collected. I have found out that the datasets for GHG emissions per GDP, GHG emission per capita are not available, but will have to be calculated. This will have to be done whilst converting multiple CSV's from different sets into one JSON set.
 No useful dataset can be found on the temperature per country. This, and the thought that the change in temperature per country might not be a fitting link to CO2 emission, has led to the conclusion that the line graph on temperature over the years per country will be left out. Instead, a line graph will visualize from which sector the GHG emissions are originating by plotting a line per sector. Furthermore, a pie chart will visualize which gasses are emitted in which ratio. This will be in range of 1960 to 2012. This tells a more fitting story to the data in the world map.

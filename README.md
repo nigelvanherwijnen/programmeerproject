@@ -29,5 +29,5 @@ Data has been obtained from the World Bank, the World Recourses Institute and Be
 ## GUI
 A concept of the GUI can be found here.
 ![Alt text](/doc/title_page_v1.jpg)
-![Alt text](/doc/CO2_emission_page_v2.jpg)
+![Alt text](/doc/CO2_emission_page_v3.jpg)
 ![Alt text](/doc/GDP_CO2_page_v2.jpg)
