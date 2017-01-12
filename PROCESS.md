@@ -9,4 +9,8 @@ An additional page will focus on the relation between the emission of green hous
 The last page will include information on the way energy is produced. This means the focus of the total project will be on CO2 emission, the correlation with the welfare of a country and the way energy is produced. The visualization showing information on deforestation and urbanization will probably be left out.
 
 ## Day 3 - 11/01/2017
-The new plan has been elaborated today and the design document has been made. 
+The new plan has been elaborated today and the design document has been made.
+
+## Day 4 - 12/01/2017
+Today I have planned to have all data collected. I have found out that the datasets for GHG emissions per GDP, GHG emission per capita are not available, but will have to be calculated. This will have to be done by converting multiple CSV's from different sets into one JSON set.
+No useful dataset can be found on the temperature per country. This, and the thought that the change in temperature per country might not be a fitting link to CO2 emission, has led to the conclusion that the line graph on temperature over the years per country will be left out. Instead, a line graph will visualize from which sector the GHG emissions are originating by plotting a line per sector. Furthermore, a pie chart will visualize which gasses are emitted in which ratio. This will be in range of 1960 to 2012. This tells a more fitting story to the data in the world map.
