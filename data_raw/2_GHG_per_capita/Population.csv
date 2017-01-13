@@ -1,4 +1,4 @@
-Country;Year;Population (People)
+Country;Year;Population
 Afghanistan;1960;8774440
 Afghanistan;1961;8953544
 Afghanistan;1962;9141783
@@ -9115,112 +9115,112 @@ World;2009;6804045819
 World;2010;6884007764
 World;2011;6964618177
 World;2012;7043181414
-European Union (15);1960;317030684
-European Union (15);1961;319717303
-European Union (15);1962;322624666
-European Union (15);1963;325540416
-European Union (15);1964;328365144
-European Union (15);1965;331167471
-European Union (15);1966;333741143
-European Union (15);1967;335968869
-European Union (15);1968;338026254
-European Union (15);1969;340098574
-European Union (15);1970;341873397
-European Union (15);1971;343645270
-European Union (15);1972;345675343
-European Union (15);1973;347528768
-European Union (15);1974;349150836
-European Union (15);1975;350602363
-European Union (15);1976;351855707
-European Union (15);1977;352986256
-European Union (15);1978;354243287
-European Union (15);1979;355432427
-European Union (15);1980;356657715
-European Union (15);1981;357805125
-European Union (15);1982;358515762
-European Union (15);1983;359061838
-European Union (15);1984;359587422
-European Union (15);1985;360216096
-European Union (15);1986;361009173
-European Union (15);1987;361865745
-European Union (15);1988;362936460
-European Union (15);1989;364383577
-European Union (15);1990;365978380
-European Union (15);1991;367445785
-European Union (15);1992;369143471
-European Union (15);1993;370659322
-European Union (15);1994;371815941
-European Union (15);1995;372859336
-European Union (15);1996;373871918
-European Union (15);1997;374798228
-European Union (15);1998;375675535
-European Union (15);1999;376782411
-European Union (15);2000;378245520
-European Union (15);2001;379995472
-European Union (15);2002;381999402
-European Union (15);2003;384135046
-European Union (15);2004;386382563
-European Union (15);2005;388612242
-European Union (15);2006;390725752
-European Union (15);2007;393052554
-European Union (15);2008;395295557
-European Union (15);2009;396958984
-European Union (15);2010;398402644
-European Union (15);2011;399838757
-European Union (15);2012;399652039
-European Union (28);1960;405191746
-European Union (28);1961;408684394
-European Union (28);1962;412339043
-European Union (28);1963;416055219
-European Union (28);1964;419727942
-European Union (28);1965;423227307
-European Union (28);1966;426477289
-European Union (28);1967;429576310
-European Union (28);1968;432451039
-European Union (28);1969;435224131
-European Union (28);1970;437511962
-European Union (28);1971;439772813
-European Union (28);1972;442512390
-European Union (28);1973;445108596
-European Union (28);1974;447544423
-European Union (28);1975;449904829
-European Union (28);1976;452059141
-European Union (28);1977;454016067
-European Union (28);1978;455975033
-European Union (28);1979;457779620
-European Union (28);1980;459636671
-European Union (28);1981;461393262
-European Union (28);1982;462669165
-European Union (28);1983;463754331
-European Union (28);1984;464788913
-European Union (28);1985;465915537
-European Union (28);1986;467188782
-European Union (28);1987;468490290
-European Union (28);1988;469951795
-European Union (28);1989;471519726
-European Union (28);1990;473064921
-European Union (28);1991;474367095
-European Union (28);1992;475841027
-European Union (28);1993;477284301
-European Union (28);1994;478390618
-European Union (28);1995;479329374
-European Union (28);1996;480186948
-European Union (28);1997;480951290
-European Union (28);1998;481667296
-European Union (28);1999;482625992
-European Union (28);2000;483549692
-European Union (28);2001;484721520
-European Union (28);2002;486064132
-European Union (28);2003;487900768
-European Union (28);2004;489891068
-European Union (28);2005;491861356
-European Union (28);2006;493738694
-European Union (28);2007;495590904
-European Union (28);2008;497474203
-European Union (28);2009;498957308
-European Union (28);2010;500187746
-European Union (28);2011;501735856
-European Union (28);2012;501340957
+European Union;1960;317030684
+European Union;1961;319717303
+European Union;1962;322624666
+European Union;1963;325540416
+European Union;1964;328365144
+European Union;1965;331167471
+European Union;1966;333741143
+European Union;1967;335968869
+European Union;1968;338026254
+European Union;1969;340098574
+European Union;1970;341873397
+European Union;1971;343645270
+European Union;1972;345675343
+European Union;1973;347528768
+European Union;1974;349150836
+European Union;1975;350602363
+European Union;1976;351855707
+European Union;1977;352986256
+European Union;1978;354243287
+European Union;1979;355432427
+European Union;1980;356657715
+European Union;1981;357805125
+European Union;1982;358515762
+European Union;1983;359061838
+European Union;1984;359587422
+European Union;1985;360216096
+European Union;1986;361009173
+European Union;1987;361865745
+European Union;1988;362936460
+European Union;1989;364383577
+European Union;1990;365978380
+European Union;1991;367445785
+European Union;1992;369143471
+European Union;1993;370659322
+European Union;1994;371815941
+European Union;1995;372859336
+European Union;1996;373871918
+European Union;1997;374798228
+European Union;1998;375675535
+European Union;1999;376782411
+European Union;2000;378245520
+European Union;2001;379995472
+European Union;2002;381999402
+European Union;2003;384135046
+European Union;2004;386382563
+European Union;2005;388612242
+European Union;2006;390725752
+European Union;2007;393052554
+European Union;2008;395295557
+European Union;2009;396958984
+European Union;2010;398402644
+European Union;2011;399838757
+European Union;2012;399652039
+European Union;1960;405191746
+European Union;1961;408684394
+European Union;1962;412339043
+European Union;1963;416055219
+European Union;1964;419727942
+European Union;1965;423227307
+European Union;1966;426477289
+European Union;1967;429576310
+European Union;1968;432451039
+European Union;1969;435224131
+European Union;1970;437511962
+European Union;1971;439772813
+European Union;1972;442512390
+European Union;1973;445108596
+European Union;1974;447544423
+European Union;1975;449904829
+European Union;1976;452059141
+European Union;1977;454016067
+European Union;1978;455975033
+European Union;1979;457779620
+European Union;1980;459636671
+European Union;1981;461393262
+European Union;1982;462669165
+European Union;1983;463754331
+European Union;1984;464788913
+European Union;1985;465915537
+European Union;1986;467188782
+European Union;1987;468490290
+European Union;1988;469951795
+European Union;1989;471519726
+European Union;1990;473064921
+European Union;1991;474367095
+European Union;1992;475841027
+European Union;1993;477284301
+European Union;1994;478390618
+European Union;1995;479329374
+European Union;1996;480186948
+European Union;1997;480951290
+European Union;1998;481667296
+European Union;1999;482625992
+European Union;2000;483549692
+European Union;2001;484721520
+European Union;2002;486064132
+European Union;2003;487900768
+European Union;2004;489891068
+European Union;2005;491861356
+European Union;2006;493738694
+European Union;2007;495590904
+European Union;2008;497474203
+European Union;2009;498957308
+European Union;2010;500187746
+European Union;2011;501735856
+European Union;2012;501340957
 Albania;1960;1608800
 Albania;1961;1659800
 Albania;1962;1711319
