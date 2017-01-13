@@ -2,31 +2,6 @@
 // UvA ID: 10330879
 
 
-// Start when window is loaded
-window.onload = function() {
-
-  // Load JSON data, log on error
-  d3.json("data/data.json", function(error, jsonData) {
-    if(error) throw error;
-
-    // Format data for chart and map
-    var map_data = processDataMap(jsonData);
-
-    console.log(jsonData);
-    console.log(map_data);
-
-    // Setup default year
-    var year = 2011;
-
-
-    // Make a new datamap
-    makeDataMap(map_data, year);
-
-
-  });
-};
-
-
 // This function draws a datamap viewing given data.
 function makeDataMap(map_data, year) {
 
@@ -73,7 +48,7 @@ function makeDataMap(map_data, year) {
         } else {
           return '<div class="hoverinfo">' +
             "<strong>" + geography.properties.name + "</strong><br/>" +
-            "GHG  data unavailable</div>"
+            "GHG Emission data unavailable</div>"
         };
       }
     },
@@ -105,51 +80,4 @@ function makeDataMap(map_data, year) {
     }
   });
 
-};
-
-
-
-
-// Reformat the JSON data as necassery for datamap.
-function processDataMap(data) {
-
-  // Define object to save data
-  var map_data = new Object;
-
-  // Loop over every year
-  for (var i = 1990; i < 2013; i++) {
-    var year_data = new Object;
-
-    // Loop over every country
-    data[i].forEach(function(d) {
-
-      // Define fillKey
-      if (d.ghg > 15) { key = "veryhigh"; }
-      else if (d.ghg > 10) { key = "high"; }
-      else if (d.ghg > 5) { key = "medium"; }
-      else if (d.ghg > 1) { key = "low"; }
-      else { key = "verylow"; };
-
-      // Save data
-      if (d.ghg != 0) {
-        year_data[d.code] = {
-          name: d.name,
-          fillKey: key,
-          ghg: d.ghg
-        };
-      } else {
-        year_data[d.code] = {
-          name: d.name,
-          fillKey: "unavailable",
-          ghg: 0
-        };
-      };
-    });
-
-    // Save data
-    map_data[i] = year_data;
-  };
-
-  // Return data
-  return map_data;
 };

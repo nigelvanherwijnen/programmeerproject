@@ -19,7 +19,7 @@ with open("../data_raw/country_codes.csv", "rU") as csv_file:
 
 
 with open("../data_raw/2_GHG_per_capita/ghg_per_capita.csv", "rU") as csv_file1:
-    with open("../project/data/data.json", "w+") as json_file:
+    with open("../project/data/data_datamap.json", "w+") as json_file:
 
         rows = csv.DictReader(csv_file1, delimiter = ",")
         for row in rows:
