@@ -10,17 +10,17 @@ window.onload = function() {
     if(error) throw error;
 
     // Format data for chart and map
-    // var map_data = processDataMap(jsonData);
+    var map_data = processDataMap(jsonData);
 
     console.log(jsonData);
-    // console.log(map_data);
+    console.log(map_data);
 
     // Setup default year
-    var year = 2010;
+    var year = 2011;
 
 
     // Make a new datamap
-    // makeDataMap(chart_data, map_data, year);
+    makeDataMap(map_data, year);
 
 
   });
@@ -28,7 +28,7 @@ window.onload = function() {
 
 
 // This function draws a datamap viewing given data.
-function makeDataMap(chart_data, map_data, year) {
+function makeDataMap(map_data, year) {
 
   // Define the way data will be formatted
   var formatValue = d3.format(",.2f");
@@ -36,26 +36,26 @@ function makeDataMap(chart_data, map_data, year) {
   // Make a new datamap
   var map = new Datamap({
     element: document.getElementById("container_map"),
-    done: function(datamap) {
-
-
-      // When a country is clicked
-      datamap.svg.selectAll(".datamaps-subunit").on("click", function(geography) {
-
-        // Surprise when clicking on USA
-        if (geography.id == "USA" || geography.id == "RUS") { window.open('https://goo.gl/a1N33x', '_blank'); }
-
-        // Remove drawn elements that will be redrawn
-        d3.select("#container_chart").select("svg").remove();
-        d3.select("#container_chart").select(".infobox_chart").remove();
-        d3.select("#container_chart").select(".country_name").remove();
-
-        // Redraw pie chart
-        makePieChart(chart_data, map_data, year, geography.id);
-
-
-      });
-    },
+    // done: function(datamap) {
+    //
+    //
+    //   // When a country is clicked
+    //   datamap.svg.selectAll(".datamaps-subunit").on("click", function(geography) {
+    //
+    //     // Surprise when clicking on USA
+    //     if (geography.id == "USA" || geography.id == "RUS") { window.open('https://goo.gl/a1N33x', '_blank'); }
+    //
+    //     // Remove drawn elements that will be redrawn
+    //     d3.select("#container_chart").select("svg").remove();
+    //     d3.select("#container_chart").select(".infobox_chart").remove();
+    //     d3.select("#container_chart").select(".country_name").remove();
+    //
+    //     // Redraw pie chart
+    //     makePieChart(chart_data, map_data, year, geography.id);
+    //
+    //
+    //   });
+    // },
     scope: "world",
     geographyConfig: {
 
@@ -69,11 +69,11 @@ function makeDataMap(chart_data, map_data, year) {
         if (data.total != 0) {
           return '<div class="hoverinfo">' +
             "<strong>" + geography.properties.name + "</strong><br/>" +
-            "Energy consumption: " + formatValue(data.total) + " kWh / capita</div>"
+            "GHG Emission: " + formatValue(data.ghg) + " tCO2e / capita</div>"
         } else {
           return '<div class="hoverinfo">' +
             "<strong>" + geography.properties.name + "</strong><br/>" +
-            "Energy consumption data unavailable</div>"
+            "GHG Emission data unavailable</div>"
         };
       }
     },
@@ -95,13 +95,13 @@ function makeDataMap(chart_data, map_data, year) {
 
   // Define legend for datamap
   map.legend({
-    legendTitle : "Energy consumption in kWh per capita",
+    legendTitle : "Total GHG Emissions Per Capita (tCO2e Per Capita)",
     labels: {
-      veryhigh: ">4000:",
-      high: "3000-4000:",
-      medium: "2000-3000:",
-      low: "1000-2000:",
-      verylow: "<1000:"
+      veryhigh: ">15:",
+      high: "10-15:",
+      medium: "5-10:",
+      low: "1-5:",
+      verylow: "<1:"
     }
   });
 
@@ -124,24 +124,24 @@ function processDataMap(data) {
     data[i].forEach(function(d) {
 
       // Define fillKey
-      if (d.total > 4000) { key = "veryhigh"; }
-      else if (d.total > 3000) { key = "high"; }
-      else if (d.total > 2000) { key = "medium"; }
-      else if (d.total > 1000) { key = "low"; }
+      if (d.ghg > 15) { key = "veryhigh"; }
+      else if (d.ghg > 10) { key = "high"; }
+      else if (d.ghg > 5) { key = "medium"; }
+      else if (d.ghg > 1) { key = "low"; }
       else { key = "verylow"; };
 
       // Save data
-      if (d.total != 0) {
+      if (d.ghg != 0) {
         year_data[d.code] = {
           name: d.name,
           fillKey: key,
-          total: d.total
+          ghg: d.ghg
         };
       } else {
         year_data[d.code] = {
           name: d.name,
           fillKey: "unavailable",
-          total: 0
+          ghg: 0
         };
       };
     });

@@ -1,0 +1,14 @@
+/*CSS on position and size of the map*/
+#container_map {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+/*Set the overall CSS of the body*/
+body {
+  font-family: sans-serif;
+  margin: auto;
+  position: relative;
+  width: 960px;
+}
