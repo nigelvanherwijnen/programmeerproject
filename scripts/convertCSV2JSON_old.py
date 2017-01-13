@@ -56,7 +56,7 @@ with open("../data_raw/2_GHG_per_capita/GHG_total.csv", "rU") as csv_file1:
                 if row["Total"] != "" and data_population[row["Country"]][row["Year"]] != "":
                     data_ghg[row["Country"]][row["Year"]] = int(row["Total"]) / int(data_population[row["Country"]][row["Year"]])
                 else:
-                    data_ghg[row["Country"]][row["Year"]] = ""
+                    data_ghg[row["Country"]][row["Year"]] = 0
 
 
 
