@@ -10,15 +10,18 @@ window.onload = function() {
 
     // Format data for chart and map
     var map_data = processDataMap(jsonData);
+    var chart_data = processDataChart(jsonData);
 
     // console.log(jsonData);
     // console.log(map_data);
+    // console.log(chart_data);
 
     // Setup default year
     var year = 2011;
 
     // Make a new datamap
     // makeDataMap(map_data, year);
+    makePieChart(chart_data, map_data, year, "NLD");
 
   });
 
