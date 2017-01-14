@@ -51,7 +51,7 @@ function processDataChart(data) {
 
   // Define variable to store data and define way to format values
   var chart_data = new Object;
-  var formatValue = d3.format(",.0f");
+  var formatValue = d3.format(".0f");
 
   // Loop over every year
   for (var i = 1990; i < 2013; i++){
@@ -71,11 +71,11 @@ function processDataChart(data) {
       n2o[d.code] = {"value": +formatValue(d.n2o), "cat": "N2O", "name": d.name};
       other[d.code] = {"value": +formatValue(d.n2o), "cat": "Other", "name": d.name};
 
-
-
-      // Rewrite "other" if data overlaps data overlaps
+      // Rewrite "other" if data overlaps
       if (other[d.code].value < 0) { other[d.code].value = 0 }
     });
+
+    // console.log(co2["USA"])
 
     // Save data
     chart_data[i] = [co2, ch4, n2o, other]
