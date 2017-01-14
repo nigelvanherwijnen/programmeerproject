@@ -231,3 +231,295 @@ function makePieChart(chart_data, map_data, year, code) {
   //   makeDataMap(chart_data, map_data, year);
   // });
 };
+
+function makeLineGraph(line_data, year, code) {
+
+  var data = line_data[code];
+
+  // Initialize graph
+  var graph = d3.select("svg"),
+      margin = {top: 20, right: 100, bottom: 50, left: 50},
+      width = graph.attr("width") - margin.left - margin.right,
+      height = graph.attr("height") - margin.top - margin.bottom,
+      g = graph.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // Setup functions to parse dates and values
+  var parseTime = d3.time.format("%Y").parse,
+      bisectDate = d3.bisector(function(d) { return d.year; }).left,
+      formatValue = d3.format(",.2f");
+
+  // Define graph colors and scaling factors
+  var colors = ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02"];
+  var x = d3.scale.linear().range([0, width]),
+      y = d3.scale.linear().range([height, 0]),
+      z = d3.scale.category20();
+
+  // Define line to draw graph
+  var line = d3.svg.line()
+      .x(function(d) { return x(d.year); });
+
+  // Define the x axis
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom")
+      .tickFormat(d3.format("d"));
+
+  // Define the y axis
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
+
+  // Calculate domains for x and y axes
+  x.domain(d3.extent(data["values"], function(d) { return d.year }));
+  y.domain([0,
+    d3.max([data], function(c) {
+      return d3.max(c.values, function(d) {
+        return Math.max(d.waste, d.energy, d.industrial, d.land, d.agriculture, d.fuel);
+      });
+    })
+  ]);
+
+  // Make the x axis
+  g.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+  // Make the y axis
+  g.append("g")
+    .attr("class", "y axis")
+    .call(yAxis)
+    .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .style("text-anchor", "end")
+    .text("Gass (MtCO2e)");
+
+
+  // Define variable for the plot
+  var plot = g.selectAll(".plot")
+    .data([data])
+    .enter().append("g")
+    .attr("class", "line_graph");
+
+  // Draw three graphs for three variables
+  drawLine("waste", colors[2]);
+  drawLine("energy", colors[1]);
+  drawLine("industrial", colors[0]);
+  drawLine("agriculture", colors[3]);
+  drawLine("fuel", colors[4]);
+  drawLine("land", colors[5]);
+
+  // This function draws the graphs
+  function drawLine(whichFeature, color){
+
+    line.y(function(d) {
+      // console.log(whichFeature);
+      return y(d[whichFeature]); }
+    );
+
+    // Append the line to the graph
+    plot.append("path")
+      .attr("class", "line")
+      .attr("d", function(d) { return line(d.values); })
+      .style("stroke", color);
+
+  };
+
+  // Add a variable to hold a legend
+  var legend = g.selectAll(".country")
+    .data([data])
+    .enter().append("g")
+    .attr("class", "legend");
+
+  // Append colored boxes to legend
+  legend.append("rect")
+      .attr("x", width - 20)
+      .attr("y", margin.top + 20)
+      .attr("width", 10)
+      .attr("height", 10)
+      .style("fill", colors[0]);
+
+  legend.append("rect")
+      .attr("x", width - 20)
+      .attr("y", margin.top + 40)
+      .attr("width", 10)
+      .attr("height", 10)
+      .style("fill", colors[2]);
+
+  legend.append("rect")
+      .attr("x", width - 20)
+      .attr("y", margin.top + 60)
+      .attr("width", 10)
+      .attr("height", 10)
+      .style("fill", colors[1]);
+
+  legend.append("rect")
+      .attr("x", width - 20)
+      .attr("y", margin.top + 80)
+      .attr("width", 10)
+      .attr("height", 10)
+      .style("fill", colors[3]);
+
+  legend.append("rect")
+      .attr("x", width - 20)
+      .attr("y", margin.top + 100)
+      .attr("width", 10)
+      .attr("height", 10)
+      .style("fill", colors[4]);
+
+  legend.append("rect")
+      .attr("x", width - 20)
+      .attr("y", margin.top + 120)
+      .attr("width", 10)
+      .attr("height", 10)
+      .style("fill", colors[5]);
+
+  // Append variable names to legend
+  legend.append("text")
+      .attr("x", width - 8)
+      .attr("y", margin.top + 30)
+      .text("Industrial");
+
+  legend.append("text")
+      .attr("x", width - 8)
+      .attr("y", margin.top + 50)
+      .text("Waste");
+
+  legend.append("text")
+      .attr("x", width - 8)
+      .attr("y", margin.top + 70)
+      .text("Energy");
+
+  legend.append("text")
+      .attr("x", width - 8)
+      .attr("y", margin.top + 90)
+      .text("Agriculture");
+
+  legend.append("text")
+      .attr("x", width - 8)
+      .attr("y", margin.top + 110)
+      .text("Fuel");
+
+  legend.append("text")
+      .attr("x", width - 8)
+      .attr("y", margin.top + 130)
+      .text("Land-use / Forestry");
+
+  // Buttons that remove present graph and draw new dataset
+  // d3.select("#data0")
+  //   .on("click", function(d,i) {
+  //       g.selectAll(".line_graph").remove();
+  //       render(data1);
+  //   })
+  // d3.select("#data1")
+  //     .on("click", function(d,i) {
+  //       g.selectAll(".line_graph").remove();
+  //       render(data2);
+  //     })
+
+  // Default dataset, before buttons are pressed
+  // render(data);
+  //
+  // // This functions renders the graphs to be drawn.
+  // function render(data) {
+  //
+  //   // Write the name of the city currently active on screen
+  //   // g.selectAll(".city_name").remove();
+  //   // g.append("text")
+  //   //   .attr("class", "city_name")
+  //   //   .attr("x", width)
+  //   //   .attr("dy", 28)
+  //   //   .text(data["name"])
+  //
+  //   // Define variable for the plot
+  //   var plot = g.selectAll(".plot")
+  //     .data(data)
+  //     .enter().append("g")
+  //     .attr("class", "line_graph");
+  //
+  //   // Draw three graphs for three variables
+  //   drawLine("waste", colors[2]);
+  //   drawLine("energy", colors[1]);
+  //   drawLine("industrial", colors[0]);
+  //
+  //   // Define variable to hold information on data
+  //   // var focus = g.append("g")
+  //   //     .attr("class", "focus")
+  //   //     .style("display", "none");
+  //
+  //   // Append a horizontal line
+  //   // focus.append("line")
+  //   //   .attr("y1", y(0))
+  //   //   .attr("y2", y(height))
+  //   //   .style("stroke-width", 2)
+  //   //   .style("stroke", "black")
+  //   //   .style("fill", "none");
+  //
+  //   // Append information to canvas
+  //   // g.append("rect")
+  //   //     .attr("class", "overlay")
+  //   //     .attr("width", width)
+  //   //     .attr("height", height)
+  //   //     .on("mouseover", function() { focus.style("display", null); })
+  //   //     .on("mouseout", function() { focus.style("display", "none"); })
+  //   //     .on("mousemove", mousemove);
+  //
+  //   // This function renders the information to be gathered on mouseover
+  //   // function mousemove() {
+  //   //
+  //   //   // Find out which datapoint is pointed at
+  //   //   var x0 = x.invert(d3.mouse(this)[0]),
+  //   //       i = bisectDate(data[0]["values"], x0, 1),
+  //   //       d = data[0]["values"][i];
+  //   //
+  //   //   // Translate the mouseover to the calculated position
+  //   //   focus.attr("transform", "translate(" + x(d.date) + "," + y(30) + ")");
+  //   //
+  //   //   // Save a string containing date information
+  //   //   var date_string = d.date.getDate() + "/" + d.date.getMonth() + "/" + (1900 + d.date.getYear());
+  //   //
+  //   //   // Remove text if present and append new text
+  //   //   focus.selectAll(".text_class").remove();
+  //   //   focus.append("text")
+  //   //       .attr("x", 9)
+  //   //       .attr("dy", 0)
+  //   //       .attr("class", "text_class")
+  //   //       .text("Minimum: " + formatValue(d.minimum) + " ºC");
+  //   //   focus.append("text")
+  //   //       .attr("x", 9)
+  //   //       .attr("dy", -15)
+  //   //       .attr("class", "text_class")
+  //   //       .text("Average: " + formatValue(d.average) + " ºC");
+  //   //   focus.append("text")
+  //   //       .attr("x", 9)
+  //   //       .attr("dy", -30)
+  //   //       .attr("class", "text_class")
+  //   //       .text("Maximum: " + formatValue(d.maximum) + " ºC");
+  //   //   focus.append("text")
+  //   //       .attr("x", 9)
+  //   //       .attr("dy", -45)
+  //   //       .attr("class", "text_class")
+  //   //       .text("Date: " + date_string);
+  //   // };
+  //
+  //   // This function draws the graphs
+  //   function drawLine(whichFeature, color){
+  //
+  //     line.y(function(d) {
+  //       console.log(d);
+  //       return y(d[whichFeature]); }
+  //     );
+  //
+  //     // Append the line to the graph
+  //     plot.append("path")
+  //       .attr("class", "line")
+  //       .attr("d", function(d) { return line(d.values); })
+  //       .style("stroke", color);
+  //   };
+  // };
+
+
+};

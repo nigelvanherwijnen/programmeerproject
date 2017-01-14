@@ -64,3 +64,40 @@ body {
   text-align: center;
   font-weight: bold;
 }
+
+/* Styling of the graph line */
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+/* Styling of the axes */
+.axis text {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+}
+
+/* Styling of the extra information showed on mouseover */
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+.focus text {
+  font: 12px sans-serif;
+  font-weight: normal;
+}
+.city_name {
+  text-anchor: end;
+  font: 56px arial;
+  font-weight: bold;
+  opacity: 0.1;
+}
+
+.legend {
+  font: 12px sans-serif;
+}

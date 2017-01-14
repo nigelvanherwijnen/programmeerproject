@@ -72,15 +72,43 @@ function processDataChart(data) {
       other[d.code] = {"value": +formatValue(d.n2o), "cat": "Other", "name": d.name};
 
       // Rewrite "other" if data overlaps
-      if (other[d.code].value < 0) { other[d.code].value = 0 }
+      if (other[d.code].value < 0) { other[d.code].value = 0 };
     });
 
     // console.log(co2["USA"])
 
     // Save data
-    chart_data[i] = [co2, ch4, n2o, other]
+    chart_data[i] = [co2, ch4, n2o, other];
   };
 
   // Return data
-  return chart_data
+  return chart_data;
 };
+
+function processDataLine(data) {
+
+  var line_data = new Object;
+
+  data[1990].forEach(function(d) {
+    line_data[d.code] = new Object
+    line_data[d.code].name = d.name
+    line_data[d.code].values = []
+  })
+
+  for (i = 1990; i < 2013; i++) {
+    data[i].forEach(function(d) {
+
+      line_data[d.code].values.push({
+        "year": i,
+        "waste": d.waste,
+        "agriculture": d.agriculture,
+        "energy": d.energy,
+        "fuel": d.fuel,
+        "industrial": d.industrial,
+        "land": d.land
+      });
+    });
+  };
+
+  return line_data;
+}

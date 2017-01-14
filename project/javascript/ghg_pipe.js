@@ -11,6 +11,7 @@ window.onload = function() {
     // Format data for chart and map
     var map_data = processDataMap(jsonData);
     var chart_data = processDataChart(jsonData);
+    var line_data = processDataLine(jsonData);
 
     // console.log(jsonData);
     // console.log(map_data);
@@ -22,6 +23,7 @@ window.onload = function() {
     // Make a new datamap
     makeDataMap(chart_data, map_data, year);
     makePieChart(chart_data, map_data, year, "NLD");
+    makeLineGraph(line_data, year, "NLD");
 
   });
 

@@ -20,3 +20,5 @@ After collecting all data in the last few days, today the goal was to process th
 
 ## Day 6 - 14/01/2017
 Because of the open issue on GitHub, I decided to work an extra day in the weekend. All data for the MVP has been converted to JSON. All data for the datamap and pie chart are correctly processed. Both the datamap and pie chart are functional and linked. A problem came up when values were greater than 1000, but it has been resolved by changing the numberformat in process.js.
+
+Data for line graph has correctly been imported and the graph has been made. It is functional, but not yet interactive or linked.
