@@ -17,3 +17,6 @@ No useful dataset can be found on the temperature per country. This, and the tho
 
 ## Day 5 - 13/01/2017
 After collecting all data in the last few days, today the goal was to process the data for the map into JSON and format it in javascript. This was done by calculating the GHG emission per capita with the GHG emission per country and the population per country. But after visualizing this data in a datamap, it was clear that the data was incorrect. Why this was the case is still unknown to me, but luckily I have found a new dataset containing the GHG emission per capita. No calculations will be required. The correct data has now been implemented correctly.
+
+## Day 6 - 14/01/2017
+Because of the open issue on GitHub, I decided to work an extra day in the weekend. All data for the MVP has been converted to JSON. All data for the datamap and pie chart are correctly processed. Both the datamap and pie chart are functional and linked. A problem came up when values were greater than 1000, but it has been resolved by changing the numberformat in process.js.
