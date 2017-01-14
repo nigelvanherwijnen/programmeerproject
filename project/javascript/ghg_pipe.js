@@ -20,7 +20,7 @@ window.onload = function() {
     var year = 2011;
 
     // Make a new datamap
-    // makeDataMap(map_data, year);
+    makeDataMap(chart_data, map_data, year);
     makePieChart(chart_data, map_data, year, "NLD");
 
   });
