@@ -1,7 +1,7 @@
 /*CSS on position and size of the map*/
 #container_map {
   position: relative;
-  width: 100%;
+  width: 60%;
   height: 400px;
 }
 
@@ -17,7 +17,7 @@ body {
   font-family: sans-serif;
   margin: auto;
   position: relative;
-  width: 960px;
+  width: 90%;
 }
 
 /*Set size of font in legend of pie chart*/
@@ -65,11 +65,15 @@ body {
   font-weight: bold;
 }
 
-/* Styling of the graph line */
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+
+
+
+/********* LINE GRAPH **********/
+.country_line {
+  text-anchor: end;
+  font: 56px arial;
+  font-weight: bold;
+  opacity: 0.1;
 }
 
 /* Styling of the axes */
@@ -100,4 +104,33 @@ body {
 
 .legend {
   font: 12px sans-serif;
+}
+
+/* Styling of the graph line */
+.line {
+  fill: none;
+  stroke-width: 1.5px;
+}
+
+/********* SLIDER **********/
+/*Placing and size of the slider*/
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+    width: 8px;
+    height: 175px;
+    padding: 0 5px;
+    z-index: 10;
+    position: absolute;
+    top: 645px;
+    left: 420px;
+}
+
+/*Placing and font-size of the label next to the slider*/
+label {
+  font-size: 13px;
+  position: absolute;
+  top: 715px;
+  left: 360px;
 }

@@ -23,13 +23,23 @@ Filename: index.html
         <script src="javascript/ghg_charts.js"></script>
 
     </head>
-    <body>
+    <body><center>
 
+      <h1>Greenhouse gass emission</h1>
       <div id="container_map"></div>
+
+      <!-- Make slider -->
+      <p>
+        <label for="year" style="display: inline-block; width: 240px;">
+          year = <span id="year-value"></span>
+        </label>
+        <input type="range" min="1990" max="2012" id="year" orient="vertical">
+      </p>
 
       <div id="container_chart"></div>
 
-      <center><svg width="1000" height="500"></svg></center>
+      <div id="container_line"></div>
 
-    </body>
+
+    </center></body>
 </html>
