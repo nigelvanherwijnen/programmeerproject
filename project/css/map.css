@@ -134,3 +134,11 @@ label {
   top: 715px;
   left: 360px;
 }
+
+
+/********* LIST**********/
+
+#container_list {
+  font: 12px sans-serif;
+  text-align: left;
+}

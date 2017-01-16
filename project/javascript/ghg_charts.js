@@ -3,7 +3,7 @@
 
 
 // This function draws a datamap viewing given data.
-function makeDataMap(line_data, chart_data, map_data, year) {
+function makeDataMap(list_data, line_data, chart_data, map_data, year) {
 
   // Define the way data will be formatted
   var formatValue = d3.format(",.2f");
@@ -27,7 +27,7 @@ function makeDataMap(line_data, chart_data, map_data, year) {
         d3.select("#container_line").select("svg").remove();
 
         // Redraw pie chart
-        makePieChart(line_data, chart_data, map_data, year, geography.id);
+        makePieChart(list_data, line_data, chart_data, map_data, year, geography.id);
         makeLineGraph(line_data, year, geography.id);
 
 
@@ -85,7 +85,7 @@ function makeDataMap(line_data, chart_data, map_data, year) {
 };
 
 // This functions makes a pie chart
-function makePieChart(line_data, chart_data, map_data, year, code) {
+function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
 
   // Set data
   var data = chart_data[year];
@@ -227,13 +227,16 @@ function makePieChart(line_data, chart_data, map_data, year, code) {
     d3.select("#container_chart").select(".country_name").remove();
     d3.select("#container_map").select("svg").remove();
     d3.select("#container_map").select(".datamaps-legend").remove();
+    d3.select("#container_list").selectAll("li").remove();
 
     // Redraw
-    makePieChart(line_data, chart_data, map_data, year, code);
-    makeDataMap(line_data, chart_data, map_data, year);
+    makePieChart(list_data, line_data, chart_data, map_data, year, code);
+    makeDataMap(list_data, line_data, chart_data, map_data, year);
+    makeList(list_data, line_data, chart_data, map_data, year);
   });
 };
 
+// Line graph (http://bl.ocks.org/mbostock/1541816)
 function makeLineGraph(line_data, year, code) {
 
   var data = line_data[code];
@@ -418,4 +421,32 @@ function makeLineGraph(line_data, year, code) {
 
     };
   };
+};
+
+// List
+function makeList(list_data, line_data, chart_data, map_data, year) {
+
+  var data = list_data[year]
+
+  list = d3.select("#container_list").append("ul");
+  list.selectAll("li")
+    .data(data)
+    .enter()
+    .append("li")
+    .text(function(d){return d.name;})
+    .on("click", changeGraphs);
+
+    function changeGraphs (d) {
+      // Remove drawn elements that will be redrawn
+      d3.select("#container_chart").select("svg").remove();
+      d3.select("#container_chart").select(".infobox_chart").remove();
+      d3.select("#container_chart").select(".country_name").remove();
+      d3.select("#container_line").select("svg").remove();
+
+      // Redraw pie chart
+      makePieChart(list_data, line_data, chart_data, map_data, year, d.code);
+      makeLineGraph(line_data, year, d.code);
+    };
+
+
 };

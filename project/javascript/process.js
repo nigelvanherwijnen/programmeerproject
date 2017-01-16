@@ -85,6 +85,7 @@ function processDataChart(data) {
   return chart_data;
 };
 
+// This function reformats the data for the line chart.
 function processDataLine(data) {
 
   var line_data = new Object;
@@ -111,4 +112,20 @@ function processDataLine(data) {
   };
 
   return line_data;
-}
+};
+
+// This function reformats the data for the top 10 chart.
+// Used: http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file
+function processDataList(data) {
+
+  var list_data = new Object;
+  for (i = 1990; i < 2013; i++) {
+
+    var top10 = data[i].sort(function(a, b) { return a.ghg < b.ghg ? 1 : -1; })
+                  .slice(0, 10);
+
+    list_data[i] = top10;
+  }
+
+  return list_data
+};
