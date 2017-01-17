@@ -51,7 +51,7 @@ function processDataChart(data) {
 
   // Define variable to store data and define way to format values
   var chart_data = new Object;
-  var formatValue = d3.format(".0f");
+  var formatValue = d3.format(".2f");
 
   // Loop over every year
   for (var i = 1990; i < 2013; i++){
@@ -121,11 +121,14 @@ function processDataList(data) {
   var list_data = new Object;
   for (i = 1990; i < 2013; i++) {
 
-    var top10 = data[i].sort(function(a, b) { return a.total < b.total ? 1 : -1; })
-                  .slice(0, 10);
+    var ranked = data[i].sort(function(a, b) { return a.total < b.total ? 1 : -1; });
 
-    list_data[i] = top10;
-  }
+    for (j = 0; j < ranked.length; j++) {
+      ranked[j]["rank"] = j + 1;
+    };
 
-  return list_data
+    list_data[i] = ranked;
+  };
+
+  return list_data;
 };

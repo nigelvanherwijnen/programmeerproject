@@ -25,8 +25,6 @@ body {
   height: 400px;
 }
 
-
-
 /*Set size of font in legend of pie chart*/
 .legend_chart {
   font-size: 11px;
@@ -148,4 +146,6 @@ label {
 #container_list {
   font: 12px sans-serif;
   text-align: left;
+  height: 400px;
+  overflow: scroll;;
 }

@@ -437,19 +437,57 @@ function makeLineGraph(line_data, year, code) {
   };
 };
 
-// List
+// List (http://bl.ocks.org/gka/17ee676dc59aa752b4e6)
 function makeList(list_data, line_data, chart_data, map_data, year) {
 
   var data = list_data[year]
 
-  list = d3.select("#container_list").append("ul");
-  list.selectAll("li")
-    .data(data)
-    .enter()
-    .append("li")
-    .text(function(d){return d.name;})
+  // Define the way data will be formatted
+  var formatValue = d3.format(",.2f");
+
+  // Create table
+  var table = d3.select("#container_list").append("table").attr("class", "table table-hover");
+
+  // Define the columns
+  var columns = [
+    { head: "#", cl: "number", html: function(d) { return d.rank; }, "code": function(d) { return d.rank; } },
+    { head: "Name", cl: "title", html: function(d) { return d.name; }, "code": function(d) { return d.code; } },
+    { head: "Emission (MtCO2e)", cl: "center", html: function(d) { return formatValue(d.total); }, "code": function(d) { return d.code; } }
+  ];
+
+  // Append the header to the table
+  table.append("thead")
+    .append("tr")
+    .selectAll("th")
+    .data(columns).enter()
+    .append("th")
+    .attr("class", function(d) { return d.cl })
+    .text(function(d) { return d.head });
+
+  // Append the rest of the table
+  table.append("tbody")
+    // Append row
+    .selectAll("tr")
+    .data(data).enter()
+    .append("tr")
+    // Append cell
+    .selectAll("td")
+    .data(function(row, i) {
+        return columns.map(function(c) {
+            // NOG EVEN UITZOEKEN HOE DIT PRECIES WERKT
+            var cell = {};
+            d3.keys(c).forEach(function(k) {
+                cell[k] = typeof c[k] == "function" ? c[k](row,i) : c[k];
+            });
+            return cell;
+        });
+    }).enter()
+    .append("td")
+    .html(function(d) { return d.html; })
+    .attr("class", function(d) { return d.cl; })
     .on("click", changeGraphs);
 
+    // When clicking an item, view correct graphs
     function changeGraphs (d) {
       // Remove drawn elements that will be redrawn
       d3.select("#container_chart").select("svg").remove();
@@ -461,6 +499,8 @@ function makeList(list_data, line_data, chart_data, map_data, year) {
       makePieChart(list_data, line_data, chart_data, map_data, year, d.code);
       makeLineGraph(line_data, year, d.code);
     };
+
+
 
 
 };
