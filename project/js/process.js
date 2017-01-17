@@ -121,7 +121,7 @@ function processDataList(data) {
   var list_data = new Object;
   for (i = 1990; i < 2013; i++) {
 
-    var top10 = data[i].sort(function(a, b) { return a.ghg < b.ghg ? 1 : -1; })
+    var top10 = data[i].sort(function(a, b) { return a.total < b.total ? 1 : -1; })
                   .slice(0, 10);
 
     list_data[i] = top10;

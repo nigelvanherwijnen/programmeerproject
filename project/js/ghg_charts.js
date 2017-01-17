@@ -91,7 +91,7 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
   var data = chart_data[year];
 
   // Set size of SVG and radius of chart
-  var width = 1000,
+  var width = d3.select("#container_chart")[0][0].clientWidth,
     height = 400,
     radius = Math.min(width, height) / 2;
 
@@ -114,7 +114,7 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
       .attr("width", width)
       .attr("height", height)
       .append("g")
-      .attr("transform", "translate(" + width / (4/3) + "," + height / 2 + ")");
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
   // Draw the pie chart
   var path = svg.datum(data).selectAll("path")
@@ -136,7 +136,7 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
     .attr("transform", function(d, i) {
       var height = legendRectSize + legendSpacing;
       var offset =  height * color.domain().length / 2;
-      var horz = -3 * legendRectSize;
+      var horz = -2.5 * legendRectSize;
       var vert = i * height - offset;
       return "translate(" + horz + "," + vert + ")";
     });
@@ -148,14 +148,14 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
     .style("fill", color)
     .style("stroke", color);
 
-  // Write text of legend
+  // Write text of legend (all in MtCO2e)
   legend.append("text")
     .attr("x", legendRectSize + legendSpacing)
     .attr("y", legendRectSize - legendSpacing)
     .text(function(d) {
-      if (d == 0) { return "Total CO2 (MtCO2)"; }
-      else if (d == 1) { return "Total CH4 (MtCO2e)"; }
-      else if (d == 2) { return "Total N2O (MtCO2e)"; }
+      if (d == 0) { return "CO2 (MtCO2)"; }
+      else if (d == 1) { return "CH4 (MtCO2e)"; }
+      else if (d == 2) { return "N2O (MtCO2e)"; }
       else if (d == 3) { return "Other (MtCO2e)"; };
     });
 
@@ -227,7 +227,7 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
     d3.select("#container_chart").select(".country_name").remove();
     d3.select("#container_map").select("svg").remove();
     d3.select("#container_map").select(".datamaps-legend").remove();
-    d3.select("#container_list").selectAll("li").remove();
+    d3.select("#container_list").selectAll("ul").remove();
 
     // Redraw
     makePieChart(list_data, line_data, chart_data, map_data, year, code);
@@ -241,14 +241,16 @@ function makeLineGraph(line_data, year, code) {
 
   var data = line_data[code];
 
-  var total_width = 1000,
+  var total_width = d3.select("#container_line")[0][0].clientWidth,
       total_height = 400;
 
   // Initialize graph
-  var graph = d3.select("#container_line").append("svg").attr("width", total_width).attr("height", total_height),
-      margin = {top: 20, right: 210, bottom: 50, left: 50},
-      width = total_width - margin.left - margin.right,
-      height = total_height - margin.top - margin.bottom,
+  var graph = d3.select("#container_line").append("svg")
+                .attr("width", total_width)
+                .attr("height", total_height),
+      margin = {top: 20, right: 140, bottom: 50, left: 50},
+      width = graph.attr("width") - margin.left - margin.right,
+      height = graph.attr("height") - margin.top - margin.bottom,
       g = graph.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Setup functions to parse dates and values
@@ -405,21 +407,33 @@ function makeLineGraph(line_data, year, code) {
       d = x0 - d0.year > d1.year - x0 ? d1 : d0;
 
     // Translate the mouseover to the calculated position
-    focus.attr("transform", "translate(" + x(d.year) + "," + 120 + ")");
+    focus.attr("transform", "translate(" + x(d.year) + "," + 140 + ")");
 
 
     var variables_list = ["Industrial", "Energy", "Waste", "Agriculture", "Fuel", "Land-use / Forestry", "Year"];
-    var values_list = [d.industrial, d.energy, d.waste, d.agriculture, d.fuel, d.land, d.land];
+    var values_list = [d.industrial, d.energy, d.waste, d.agriculture, d.fuel, d.land, d.year];
 
     focus.selectAll(".text_class").remove();
+
+
     for (i = 0; i < 6; i++) {
       focus.append("text")
         .attr("x", 9)
         .attr("dy", -15 * i)
         .attr("class", "text_class")
-        .text(variables_list[i] + ": " + values_list[i] + " MtCO2e");
+        .text(variables_list[i] + ": " + formatValue(values_list[i]));
 
     };
+    focus.append("text")
+      .attr("x", 9)
+      .attr("dy", -15 * 6)
+      .attr("class", "text_class")
+      .text("Data in MtCO2");
+    focus.append("text")
+      .attr("x", 9)
+      .attr("dy", -15 * 7)
+      .attr("class", "text_class")
+      .text(variables_list[6] + ": " + values_list[6]);
   };
 };
 

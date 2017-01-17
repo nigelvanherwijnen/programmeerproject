@@ -11,7 +11,6 @@ import codecs
 
 c_codes = dict()
 data_ghg = dict()
-data_total = dict()
 
 data_co2 = dict()
 data_ch4 = dict()
@@ -59,70 +58,69 @@ with open("../data_raw/4_Emission_by_gas/ghg_emission.csv", "rU") as csv_file1:
         data_waste[row["Country"]] = dict()
         data_land[row["Country"]] = dict()
         data_fuel[row["Country"]] = dict()
-        data_total[row["Country"]] = dict()
 
     csv_file1.seek(728)
     for row in rows:
 
         if row["Total CO2 (including Land-Use Change and Forestry) (MtCO2)"] != "":
-            data_co2[row["Country"]][int(row["Year"])] = float(row["Total CO2 (including Land-Use Change and Forestry) (MtCO2)"])
+            data_co2[row["Country"]][int(row["Year"])] = abs(float(row["Total CO2 (including Land-Use Change and Forestry) (MtCO2)"]))
         else:
             data_co2[row["Country"]][int(row["Year"])] = 0
 
         if row["Total CH4 (including Land-Use Change and Forestry) (MtCO2e)"] != "":
-            data_ch4[row["Country"]][int(row["Year"])] = float(row["Total CH4 (including Land-Use Change and Forestry) (MtCO2e)"])
+            data_ch4[row["Country"]][int(row["Year"])] = abs(float(row["Total CH4 (including Land-Use Change and Forestry) (MtCO2e)"]))
         else:
             data_ch4[row["Country"]][int(row["Year"])] = 0
 
         if row["Total N2O (including Land-Use Change and Forestry) (MtCO2e)"] != "":
-            data_n2o[row["Country"]][int(row["Year"])] = float(row["Total N2O (including Land-Use Change and Forestry) (MtCO2e)"])
+            data_n2o[row["Country"]][int(row["Year"])] = abs(float(row["Total N2O (including Land-Use Change and Forestry) (MtCO2e)"]))
         else:
             data_n2o[row["Country"]][int(row["Year"])] = 0
 
         if row["Total GHG Emissions Including Land-Use Change and Forestry (MtCO?e?)"] != "":
-            data_other[row["Country"]][int(row["Year"])] = float(row["Total GHG Emissions Including Land-Use Change and Forestry (MtCO?e?)"]) - \
+            data_other[row["Country"]][int(row["Year"])] = abs(float(row["Total GHG Emissions Including Land-Use Change and Forestry (MtCO?e?)"]) - \
                                 data_n2o[row["Country"]][int(row["Year"])] - \
                                 data_ch4[row["Country"]][int(row["Year"])] - \
-                                data_co2[row["Country"]][int(row["Year"])]
+                                data_co2[row["Country"]][int(row["Year"])])
         else:
             data_other[row["Country"]][int(row["Year"])] = 0
 
 
 
         if row["Energy (MtCO2e)"] != "":
-            data_energy[row["Country"]][int(row["Year"])] = float(row["Energy (MtCO2e)"])
+            data_energy[row["Country"]][int(row["Year"])] = abs(float(row["Energy (MtCO2e)"]))
         else:
             data_energy[row["Country"]][int(row["Year"])] = 0
 
         if row["Industrial Processes (MtCO2e)"] != "":
-            data_industrial[row["Country"]][int(row["Year"])] = float(row["Industrial Processes (MtCO2e)"])
+            data_industrial[row["Country"]][int(row["Year"])] = abs(float(row["Industrial Processes (MtCO2e)"]))
         else:
             data_industrial[row["Country"]][int(row["Year"])] = 0
 
         if row["Agriculture (MtCO2e)"] != "":
-            data_agriculture[row["Country"]][int(row["Year"])] = float(row["Agriculture (MtCO2e)"])
+            data_agriculture[row["Country"]][int(row["Year"])] = abs(float(row["Agriculture (MtCO2e)"]))
         else:
             data_agriculture[row["Country"]][int(row["Year"])] = 0
 
         if row["Waste (MtCO2e)"] != "":
-            data_waste[row["Country"]][int(row["Year"])] = float(row["Waste (MtCO2e)"])
+            data_waste[row["Country"]][int(row["Year"])] = abs(float(row["Waste (MtCO2e)"]))
         else:
             data_waste[row["Country"]][int(row["Year"])] = 0
 
         if row["Land-Use Change and Forestry (MtCO2)"] != "":
-            data_land[row["Country"]][int(row["Year"])] = float(row["Land-Use Change and Forestry (MtCO2)"])
+            data_land[row["Country"]][int(row["Year"])] = abs(float(row["Land-Use Change and Forestry (MtCO2)"]))
         else:
             data_land[row["Country"]][int(row["Year"])] = 0
 
         if row["Bunker Fuels (MtCO2)"] != "":
-            data_fuel[row["Country"]][int(row["Year"])] = float(row["Bunker Fuels (MtCO2)"])
+            data_fuel[row["Country"]][int(row["Year"])] = abs(float(row["Bunker Fuels (MtCO2)"]))
         else:
             data_fuel[row["Country"]][int(row["Year"])] = 0
 
-        if row["Total GHG Emissions Including Land-Use Change and Forestry (MtCO?e?)"] != "":
-            data_total[row["Country"]][int(row["Year"])] = float(row["Total GHG Emissions Including Land-Use Change and Forestry (MtCO?e?)"])
-        else:
-            data_total[row["Country"]][int(row["Year"])] = 0
+
+
+
+
 
 
 # Write data to json
@@ -150,8 +148,7 @@ with open("../project/data/data_ghg.json", "w+") as json_file:
             "agriculture": data_agriculture[name][i], \
             "waste": data_waste[name][i], \
             "land": data_land[name][i], \
-            "fuel": data_fuel[name][i], \
-            "total": data_total[name][i]
+            "fuel": data_fuel[name][i]
             }
             # print holder
             json.dump(holder, json_file)

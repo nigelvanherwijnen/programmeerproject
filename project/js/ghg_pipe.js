@@ -21,6 +21,8 @@ window.onload = function() {
 
     // Setup default year
     var year = 2001;
+    d3.select("#year-value").text(year);
+    d3.select("#year").property("value", year);
 
     // Make a new datamap
     makeDataMap(list_data, line_data, chart_data, map_data, year);
