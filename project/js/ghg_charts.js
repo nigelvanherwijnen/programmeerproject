@@ -23,6 +23,7 @@ function makeDataMap(list_data, line_data, chart_data, map_data, year) {
         d3.select("#container_chart").select("svg").remove();
         d3.select("#container_chart").select(".infobox_chart").remove();
         d3.select("#container_chart").select(".country_name").remove();
+        d3.select("#container_chart").select(".tooltip_chart").remove();
         d3.select("#container_line").select("svg").remove();
 
         // Redraw pie chart
@@ -91,7 +92,7 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
 
   // Set size of SVG and radius of chart
   var width = d3.select("#container_chart")[0][0].clientWidth,
-    height = 400,
+    height = 450,
     radius = Math.min(width, height) / 2;
 
   // Define colors to use
@@ -113,7 +114,7 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
       .attr("width", width)
       .attr("height", height)
       .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      .attr("transform", "translate(" + width / 2 + "," + ((width / 8) + ((height - 50) / 2)) + ")");
 
   // Draw the pie chart
   var path = svg.datum(data).selectAll("path")
@@ -158,21 +159,24 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
       else if (d == 3) { return "Other (MtCO2e)"; };
     });
 
-  // // Define html text for information box
-  // var info = "Some text here"
-  //
-  // // Define box for information text
-  // var infobox = d3.select("#container_chart")
-  //   .append("div")
-  //   .attr("class", "infobox_chart");
-  //
-  // // Append title for information box
-  // infobox.append("h2")
-  //   .text("Green house gass emission");
-  //
-  // // Append text to information box
-  // infobox.append("text")
-  //   .html(info)
+  // Write title
+  d3.select("#container_chart").select("svg").append("text")
+    // .attr("font-weight", "bold")
+    .attr("font-size", "20px")
+    // .attr("text-align", "center")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate(" + width / 2 + "," + 40 + ")")
+    .text("Gass distribution")
+
+  // Write country name below title
+  d3.select("#container_chart").select("svg").append("text")
+    // .attr("font-weight", "bold")
+    .attr("font-size", "16px")
+    // .attr("text-align", "center")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate(" + width / 2 + "," + 70 + ")")
+    .attr("class", "country_name")
+    .text(function(d) { return data[0][code].name + " - " + year; });
 
   // Define tooltip for pie chart
   var tooltip = d3.select("#container_chart")
@@ -181,14 +185,14 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
 
   // Define div's inside tooltip
   tooltip.append("div")
-    .attr("class", "label");
+    .attr("class", "label_tooltip");
   tooltip.append("div")
     .attr("class", "value");
 
   // Show tooltip with content on mouseover
   path.on("mouseover", function(d) {
-    tooltip.select(".label").html(d.data[code].cat);
-    tooltip.select(".value").html(d.data[code].value + " MtCO2(e)");
+    tooltip.select(".label_tooltip").html(d.data[code].cat + ":");
+    tooltip.select(".value").html(d.data[code].value + " MtCO2e");
     tooltip.style("display", "block");
   });
 
@@ -203,15 +207,6 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
       .style("left", (d3.event.layerX + 10) + "px");
   });
 
-  // Define div for the country name above pie chart
-  var country_name = d3.select("#container_chart")
-    .append("div")
-    .attr("class", "country_name");
-
-  // Append country name text to div
-  country_name.append("text")
-    .text(function(d) { return data[0][code].name; });
-
   // On change on the slider
   d3.select("#year").on("input", function() {
 
@@ -224,6 +219,7 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
     d3.select("#container_chart").select("svg").remove();
     d3.select("#container_chart").select(".infobox_chart").remove();
     d3.select("#container_chart").select(".country_name").remove();
+    d3.select("#container_chart").select(".tooltip_chart").remove();
     d3.select("#container_map").select("svg").remove();
     d3.select("#container_map").select(".datamaps-legend").remove();
     d3.select("#container_list").selectAll("ul").remove();
@@ -241,13 +237,13 @@ function makeLineGraph(line_data, year, code) {
   var data = line_data[code];
 
   var total_width = d3.select("#container_line")[0][0].clientWidth,
-      total_height = 400;
+      total_height = 450;
 
   // Initialize graph
   var graph = d3.select("#container_line").append("svg")
                 .attr("width", total_width)
                 .attr("height", total_height),
-      margin = {top: 20, right: 140, bottom: 50, left: 50},
+      margin = {top: 70, right: 140, bottom: 50, left: 20},
       width = graph.attr("width") - margin.left - margin.right,
       height = graph.attr("height") - margin.top - margin.bottom,
       g = graph.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -288,6 +284,13 @@ function makeLineGraph(line_data, year, code) {
       });
     })
   ]);
+
+
+  graph.append("text")
+    // .attr("font-weight", "bold")
+    .attr("font-size", "20px")
+    .attr("transform", "translate(" + margin.left + "," + 40 + ")")
+    .text("GHG emission per sector")
 
   // Make the x axis
   g.append("g")
@@ -351,7 +354,7 @@ function makeLineGraph(line_data, year, code) {
     // Draw the colored boxes
     legend.append("rect")
       .attr("x", 40 + width - 20)
-      .attr("y", 180 + margin.top + (20 * (i + 1)))
+      .attr("y", 130 + margin.top + (20 * (i + 1)))
       .attr("width", 10)
       .attr("height", 10)
       .style("fill", colors[i]);
@@ -359,7 +362,7 @@ function makeLineGraph(line_data, year, code) {
     // Write the text
     legend.append("text")
       .attr("x", 40 + width - 8)
-      .attr("y", 180 + margin.top + 30 + (20 * i))
+      .attr("y", 130 + margin.top + 30 + (20 * i))
       .text(legend_names[i]);
   };
 
@@ -378,8 +381,8 @@ function makeLineGraph(line_data, year, code) {
 
   // Append a horizontal line
   focus.append("line")
-    .attr("y1", y(0))
-    .attr("y2", y(height))
+    .attr("y1", -(height / 2))
+    .attr("y2", (height / 2) + 10)
     .style("stroke-width", 1.5)
     .style("stroke", "black")
     .style("fill", "none");
@@ -406,7 +409,7 @@ function makeLineGraph(line_data, year, code) {
       d = x0 - d0.year > d1.year - x0 ? d1 : d0;
 
     // Translate the mouseover to the calculated position
-    focus.attr("transform", "translate(" + x(d.year) + "," + 140 + ")");
+    focus.attr("transform", "translate(" + x(d.year) + "," + 160 + ")");
 
 
     var variables_list = ["Industrial", "Energy", "Waste", "Agriculture", "Fuel", "Land-use / Forestry", "Year"];
@@ -449,7 +452,7 @@ function makeList(list_data, line_data, chart_data, map_data, year) {
 
   // Define the columns
   var columns = [
-    { head: "#", cl: "number", html: function(d) { return d.rank; }, "code": function(d) { return d.rank; } },
+    { head: "#", cl: "number", html: function(d) { return d.rank; }, "code": function(d) { return d.code; } },
     { head: "Name", cl: "title", html: function(d) { return d.name; }, "code": function(d) { return d.code; } },
     { head: "Emission (MtCO2e)", cl: "center", html: function(d) { return formatValue(d.total); }, "code": function(d) { return d.code; } }
   ];
@@ -492,6 +495,7 @@ function makeList(list_data, line_data, chart_data, map_data, year) {
       d3.select("#container_chart").select("svg").remove();
       d3.select("#container_chart").select(".infobox_chart").remove();
       d3.select("#container_chart").select(".country_name").remove();
+      d3.select("#container_chart").select(".tooltip_chart").remove();
       d3.select("#container_line").select("svg").remove();
 
       // Redraw pie chart

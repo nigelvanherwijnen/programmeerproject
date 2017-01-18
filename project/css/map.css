@@ -118,26 +118,13 @@ h2 {
   text-justify: inter-word;
 }
 
-/*CSS for the country name above the pie chart*/
-.country_name {
-  font-size: 24px;
-  left: 500px;
-  padding: 0px;
-  position: absolute;
-  top: -24px;
-  width: 500px;
-  z-index: 10;
-  text-align: center;
-  font-weight: bold;
-}
-
 
 
 
 /********* LINE GRAPH **********/
 .country_line {
   text-anchor: end;
-  font: 56px arial;
+  font: 48px arial;
   font-weight: bold;
   opacity: 0.1;
 }
@@ -186,7 +173,7 @@ input[type=range] {
   position: relative;
   margin: 10px 0;
   width: 100%;
-  bottom: 40px;
+  bottom: 20px;
   /*transform-origin:50% bottom;*/
 
   /*width: 8px;*/
@@ -299,7 +286,7 @@ input[type=range]:focus::-ms-fill-upper {
 label {
   font-size: 12px;
   position: relative;
-  bottom: 30px;
+  bottom: 10px;
   /*top: 715px;*/
   left: 45%;
 }
