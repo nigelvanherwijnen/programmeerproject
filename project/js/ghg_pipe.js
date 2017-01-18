@@ -29,6 +29,7 @@ window.onload = function() {
     makePieChart(list_data, line_data, chart_data, map_data, year, "NLD");
     makeLineGraph(line_data, year, "NLD");
     makeList(list_data, line_data, chart_data, map_data, year);
+    // console.log(d3.selectAll(".legend")[0])
 
   });
 

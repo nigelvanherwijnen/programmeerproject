@@ -12,6 +12,11 @@ Filename: index.html
         <meta charset="utf-8">
         <title>Programmeerproject</title>
 
+        <!--  Load Bootstrap  -->
+        <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap/bootstrap.min.js"></script>
+
         <!--  Load JS en CSS files -->
         <script type="text/javascript" src="http://d3js.org/d3.v3.js"></script>
         <script src="data/topojson.min.js"></script>
@@ -21,11 +26,6 @@ Filename: index.html
         <script src="js/ghg_pipe.js"></script>
         <script src="js/process.js"></script>
         <script src="js/ghg_charts.js"></script>
-
-        <!--  Load Bootstrap  -->
-        <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="js/bootstrap/bootstrap.min.js"></script>
 
     </head>
     <body>
@@ -37,20 +37,23 @@ Filename: index.html
           <div class="container">
               <div class="row">
                   <div class="col-md-8">
-
+                    <!-- <h4><center>GHG emission per capita</center></h4> -->
                     <div id="container_map"></div>
+                    <!-- <p> -->
+                    <center>
+                      <label for="year" style="display: inline-block; width: 240px;">
+                        Year: <span id="year-value"></span>
+                      </label>
+                      <input type="range" min="1990" max="2012" id="year">
+                    <center>
+                    <!-- </p> -->
 
                   </div>
                   <div class="col-md-4">
-
+                        <h4><center>Top emitters</center><h4>
                         <div id="container_list"></div>
 
-                        <!-- <p>
-                          <label for="year" style="display: inline-block; width: 240px;">
-                            year = <span id="year-value"></span>
-                          </label>
-                          <input type="range" min="1990" max="2012" id="year" orient="vertical">
-                        </p> -->
+
 
                   </div>
               </div>

@@ -45,7 +45,6 @@ function processDataMap(data) {
   return map_data;
 };
 
-
 // This function reformats the data for the pie chart.
 function processDataChart(data) {
 

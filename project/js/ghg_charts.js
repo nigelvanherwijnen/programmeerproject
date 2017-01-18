@@ -13,7 +13,6 @@ function makeDataMap(list_data, line_data, chart_data, map_data, year) {
     element: document.getElementById("container_map"),
     done: function(datamap) {
 
-
       // When a country is clicked
       datamap.svg.selectAll(".datamaps-subunit").on("click", function(geography) {
 
@@ -29,8 +28,6 @@ function makeDataMap(list_data, line_data, chart_data, map_data, year) {
         // Redraw pie chart
         makePieChart(list_data, line_data, chart_data, map_data, year, geography.id);
         makeLineGraph(line_data, year, geography.id);
-
-
       });
     },
     scope: "world",
@@ -71,16 +68,18 @@ function makeDataMap(list_data, line_data, chart_data, map_data, year) {
   });
 
   // Define legend for datamap
-  // map.legend({
-  //   legendTitle : "Total GHG Emissions Per Capita (tCO2e Per Capita)",
-  //   labels: {
-  //     veryhigh: ">15:",
-  //     high: "10-15:",
-  //     medium: "5-10:",
-  //     low: "1-5:",
-  //     verylow: "<1:"
-  //   }
-  // });
+  map.legend({
+    legendTitle : "Total GHG Emissions Per Capita (tCO2e Per Capita)",
+    labels: {
+      veryhigh: ">15:",
+      high: "10-15:",
+      medium: "5-10:",
+      low: "1-5:",
+      verylow: "<1:"
+    }
+  });
+
+
 
 };
 
