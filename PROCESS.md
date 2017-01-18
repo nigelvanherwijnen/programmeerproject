@@ -25,3 +25,6 @@ Data for line graph has correctly been imported and the graph has been made. It 
 
 ## Day 8 - 16/01/2017
 An interactive list has been implemented. This list shows the top 10 emitters per capita and updates when using the slider. On click, the pie chart and the line graph are updated to view information on the chosen country.
+
+## Day 10 - 18/01/2017
+To make the page organized Bootstrap has been implemented. The data for the top 10 emitters has been changed. It now holds the top emitters totally, whilst it showed the top 10 per capita before. Furthermore, it has been changed into a table instead of a list and all the countries are visible (not just the top 10).
