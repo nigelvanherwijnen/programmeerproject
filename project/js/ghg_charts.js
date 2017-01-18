@@ -41,14 +41,14 @@ function makeDataMap(list_data, line_data, chart_data, map_data, year) {
 
       // Set content of pop-up
       popupTemplate: function(geography, data) {
-        if (data.total != 0) {
+        if (data.ghg != 0) {
           return '<div class="hoverinfo">' +
             "<strong>" + geography.properties.name + "</strong><br/>" +
-            "GHG Emission: " + formatValue(data.ghg) + " tCO2e / capita</div>"
+            "GHG emission: " + formatValue(data.ghg) + " tCO2e / capita</div>"
         } else {
           return '<div class="hoverinfo">' +
             "<strong>" + geography.properties.name + "</strong><br/>" +
-            "GHG Emission data unavailable</div>"
+            "GHG emission data unavailable</div>"
         };
       }
     },
