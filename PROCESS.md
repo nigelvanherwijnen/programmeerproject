@@ -28,3 +28,15 @@ An interactive list has been implemented. This list shows the top 10 emitters pe
 
 ## Day 10 - 18/01/2017
 To make the page organized Bootstrap has been implemented. The data for the top 10 emitters has been changed. It now holds the top emitters totally, whilst it showed the top 10 per capita before. Furthermore, it has been changed into a table instead of a list and all the countries are visible (not just the top 10).
+
+## Day 11 - 19/01/2017
+A lot of minor things have been fixed today (location of line over line graph, missing text in tooltip over pie chart, etc.). Further style things have been done (styling input slider, location and style of legends, etc.).
+
+## Day 15 - 23/01/2017 and day 16 - 24/01/2016
+Now the MVP has been finished, extra components can be made and minor things that could break the page should be fixed. Today was about brainstorming how to implement the extra components and how the page overall should look.
+
+* The distribution of JS code has been changed to make the file tree more coherent.
+* A jQuery function has been written that renders the visualizations when the window has been rescaled, but I commented it out because it made the page buggy, unresponsive and slow.
+* The line graph now takes as y_min the minimum value in the graph or zero.
+* The sequence of the labels in the legend of the datamap has been changed to a logical sequence.
+* Added search bar to table. The hourglass button is just for show. By adding the button it is clearer that there will be a change somewhere on the page by using the search bar. It doesn't do anything, because the search is done while typing.

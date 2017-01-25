@@ -13,9 +13,9 @@ Filename: index.html
         <title>Programmeerproject</title>
 
         <!--  Load Bootstrap  -->
-        <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="js/bootstrap/bootstrap.min.js"></script>
+        <script src="js/bootstrap.js"></script>
 
         <!--  Load JS en CSS files -->
         <script type="text/javascript" src="http://d3js.org/d3.v3.js"></script>
@@ -23,9 +23,12 @@ Filename: index.html
         <script src="data/datamaps.world.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/map.css"/>
 
-        <script src="js/ghg_pipe.js"></script>
+        <script src="js/gasses.js"></script>
         <script src="js/process.js"></script>
-        <script src="js/ghg_charts.js"></script>
+        <script src="js/plots/ghg_datamap.js"></script>
+        <script src="js/plots/ghg_list.js"></script>
+        <script src="js/plots/gass_distribution_pie_chart.js"></script>
+        <script src="js/plots/ghg_per_sector_line_graph.js"></script>
 
     </head>
     <body>
@@ -33,7 +36,7 @@ Filename: index.html
       <center><h1>Greenhouse gass emission</h1></center>
 
 
-      <div class="wrap">
+      <!-- <div class="wrap"> -->
           <div class="container">
               <div class="row">
                   <div class="col-md-8">
@@ -48,12 +51,22 @@ Filename: index.html
                     <center>
                     <!-- </p> -->
 
+
                   </div>
                   <div class="col-md-4">
-                        <h4><center>Top emitters</center><h4>
-                        <div id="container_list"></div>
 
+                        <h4>Top emitters</h4>
 
+                        <form class="navbar-form" role="search">
+                          <div class="input-group">
+                              <input type="text" class="search form-control" id="searchCountry" onkeyup="searchTable()" placeholder="Search country...">
+                              <div class="input-group-btn">
+                                  <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                              </div>
+                          </div>
+                        </form>
+
+                    <div id="container_list"></div>
 
                   </div>
               </div>
@@ -70,7 +83,7 @@ Filename: index.html
                   </div>
               </div>
           </div>
-      </div>
+      <!-- </div> -->
 
 
 
