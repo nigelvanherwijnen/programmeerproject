@@ -80,7 +80,7 @@ function makeLineGraph(line_data, year, code) {
     .attr("y", 6)
     .attr("dy", "0.71em")
     .style("text-anchor", "end")
-    .text("Gass (MtCO2e)");
+    .text("Gas (MtCO2e)");
 
 
   // Define variable for the plot
@@ -96,21 +96,6 @@ function makeLineGraph(line_data, year, code) {
   drawLine("agriculture", colors[3]);
   drawLine("fuel", colors[4]);
   drawLine("land", colors[5]);
-
-  // This function draws the graphs
-  function drawLine(whichFeature, color){
-
-    line.y(function(d) {
-      // console.log(whichFeature);
-      return y(d[whichFeature]); }
-    );
-
-    // Append the line to the graph
-    plot.append("path")
-      .attr("class", "line")
-      .attr("d", function(d) { return line(d.values); })
-      .style("stroke", color);
-  };
 
   // Add a variable to hold a legend
   var legend = g.selectAll(".country")
@@ -168,6 +153,22 @@ function makeLineGraph(line_data, year, code) {
     .on("mouseover", function() { focus.style("display", null); })
     .on("mouseout", function() { focus.style("display", "none"); })
     .on("mousemove", mousemove);
+
+
+  // This function draws the graphs
+  function drawLine(whichFeature, color){
+
+    line.y(function(d) {
+      // console.log(whichFeature);
+      return y(d[whichFeature]); }
+    );
+
+    // Append the line to the graph
+    plot.append("path")
+      .attr("class", "line")
+      .attr("d", function(d) { return line(d.values); })
+      .style("stroke", color);
+  };
 
 
   // This function renders the information to be gathered on mouseover

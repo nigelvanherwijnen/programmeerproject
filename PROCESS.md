@@ -32,7 +32,7 @@ To make the page organized Bootstrap has been implemented. The data for the top 
 ## Day 11 - 19/01/2017
 A lot of minor things have been fixed today (location of line over line graph, missing text in tooltip over pie chart, etc.). Further style things have been done (styling input slider, location and style of legends, etc.).
 
-## Day 15 - 23/01/2017 and day 16 - 24/01/2016
+## Day 15 - 23/01/2017 and day 16 - 24/01/2017
 Now the MVP has been finished, extra components can be made and minor things that could break the page should be fixed. Today was about brainstorming how to implement the extra components and how the page overall should look.
 
 * The distribution of JS code has been changed to make the file tree more coherent.
@@ -40,3 +40,8 @@ Now the MVP has been finished, extra components can be made and minor things tha
 * The line graph now takes as y_min the minimum value in the graph or zero.
 * The sequence of the labels in the legend of the datamap has been changed to a logical sequence.
 * Added search bar to table. The hourglass button is just for show. By adding the button it is clearer that there will be a change somewhere on the page by using the search bar. It doesn't do anything, because the search is done while typing.
+
+## Day 17 - 25/01/2017
+In the list, a function within a function has been taken out of scope. Fixed a bug where the table was not updated when using the slider. Tried changing the table to DataTable. The search bar has to be placed correctly and now only a couple of results are shown instead of a scrollable list.
+
+Table is now sortable and all results are shown. The self made search box is now linked to the table and DataTable's search box has been made invisible. Also started on making the pie chart animated.
