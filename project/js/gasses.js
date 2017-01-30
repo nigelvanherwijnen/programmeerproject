@@ -1,5 +1,7 @@
 // Nigel van Herwijnen
 // UvA ID: 10330879
+//
+// File: gasses.js
 
 // Start when window is loaded
 window.onload = function() {
@@ -14,11 +16,6 @@ window.onload = function() {
     var line_data = processDataLine(jsonData);
     var list_data = processDataList(jsonData);
 
-    // console.log(jsonData);
-    // console.log(list_data);
-    // console.log(map_data);
-    // console.log(chart_data);
-
     // Setup default year
     var year = 2001;
     d3.select("#year-value").text(year);
@@ -26,11 +23,8 @@ window.onload = function() {
 
     // Make a new datamap
     makeDataMap(list_data, line_data, chart_data, map_data, year);
-    makePieChart(list_data, line_data, chart_data, map_data, year, "NLD");
+    initPieChart(list_data, line_data, chart_data, map_data, year, "NLD");
     makeLineGraph(line_data, year, "NLD");
     makeList(list_data, line_data, chart_data, map_data, year);
-
   });
-
-
 };

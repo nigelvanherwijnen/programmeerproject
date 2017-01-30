@@ -1,16 +1,26 @@
-// Line graph (http://bl.ocks.org/mbostock/1541816)
+// Nigel van Herwijnen
+// UvA ID: 10330879
+//
+// File: ghg_per_sector_line_graph.js
+
+// This function makes a line graph
 function makeLineGraph(line_data, year, code) {
 
+  // Set data
   var data = line_data[code];
 
+  // Retrieve width and set height
   var total_width = d3.select("#container_line")[0][0].clientWidth,
       total_height = 450;
+
+  // Remove graph if already present
+  d3.select("#container_line").select("svg").remove();
 
   // Initialize graph
   var graph = d3.select("#container_line").append("svg")
                 .attr("width", total_width)
                 .attr("height", total_height),
-      margin = {top: 70, right: 140, bottom: 50, left: 35},
+      margin = {top: 20, right: 140, bottom: 50, left: 35},
       width = graph.attr("width") - margin.left - margin.right,
       height = graph.attr("height") - margin.top - margin.bottom,
       g = graph.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -56,13 +66,6 @@ function makeLineGraph(line_data, year, code) {
       });
     })
   ]);
-
-
-  graph.append("text")
-    // .attr("font-weight", "bold")
-    .attr("font-size", "20px")
-    .attr("transform", "translate(" + margin.left + "," + 40 + ")")
-    .text("GHG emission per sector")
 
   // Make the x axis
   g.append("g")
@@ -144,7 +147,6 @@ function makeLineGraph(line_data, year, code) {
     .style("stroke", "black")
     .style("fill", "none");
 
-
   // Append information to canvas
   g.append("rect")
     .attr("class", "overlay")
@@ -153,7 +155,6 @@ function makeLineGraph(line_data, year, code) {
     .on("mouseover", function() { focus.style("display", null); })
     .on("mouseout", function() { focus.style("display", "none"); })
     .on("mousemove", mousemove);
-
 
   // This function draws the graphs
   function drawLine(whichFeature, color){
@@ -170,7 +171,6 @@ function makeLineGraph(line_data, year, code) {
       .style("stroke", color);
   };
 
-
   // This function renders the information to be gathered on mouseover
   function mousemove() {
 
@@ -184,13 +184,14 @@ function makeLineGraph(line_data, year, code) {
     // Translate the mouseover to the calculated position
     focus.attr("transform", "translate(" + x(d.year) + "," + 160 + ")");
 
-
+    // Set variables to be printed
     var variables_list = ["Industrial", "Energy", "Waste", "Agriculture", "Fuel", "Land-use / Forestry", "Year"];
     var values_list = [d.industrial, d.energy, d.waste, d.agriculture, d.fuel, d.land, d.year];
 
+    // Empty focus
     focus.selectAll(".text_class").remove();
 
-
+    // Print all variables
     for (i = 0; i < 6; i++) {
       focus.append("text")
         .attr("x", 9)
@@ -199,6 +200,8 @@ function makeLineGraph(line_data, year, code) {
         .text(variables_list[i] + ": " + formatValue(values_list[i]));
 
     };
+
+    // Add two more elements
     focus.append("text")
       .attr("x", 9)
       .attr("dy", -15 * 6)

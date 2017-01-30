@@ -1,5 +1,5 @@
 // Nigel van Herwijnen
-// Uva ID: 10330879  
+// Uva ID: 10330879
 
 // This function draws a datamap viewing given data.
 function makeDataMap(list_data, line_data, chart_data, map_data, year) {
@@ -15,19 +15,12 @@ function makeDataMap(list_data, line_data, chart_data, map_data, year) {
       // When a country is clicked
       datamap.svg.selectAll(".datamaps-subunit").on("click", function(geography) {
 
-        // // Surprise when clicking on USA
-        // if (geography.id == "USA" || geography.id == "RUS") { window.open('https://goo.gl/a1N33x', '_blank'); }
+        // Surprise when clicking on USA and Russia
+        if (geography.id == "USA" || geography.id == "RUS") { window.open('https://goo.gl/a1N33x', '_blank'); }
 
-        // Remove drawn elements that will be redrawn
-        d3.select("#container_chart").select("svg").remove();
-        d3.select("#container_chart").select(".infobox_chart").remove();
-        d3.select("#container_chart").select(".country_name").remove();
-        d3.select("#container_chart").select(".tooltip_chart").remove();
-        d3.select("#container_line").select("svg").remove();
-
-        // Redraw pie chart
-        makePieChart(list_data, line_data, chart_data, map_data, year, geography.id);
+        // update pie chart and redraw line graph
         makeLineGraph(line_data, year, geography.id);
+        updatePieChart(list_data, line_data, chart_data, map_data, year, geography.id);
       });
     },
     scope: "world",
@@ -69,7 +62,7 @@ function makeDataMap(list_data, line_data, chart_data, map_data, year) {
 
   // Define legend for datamap
   map.legend({
-    legendTitle : "Total GHG Emissions Per Capita (tCO2e Per Capita)",
+    legendTitle : "(tCO2e Per Capita)",
     labels: {
       verylow: "<1:",
       low: "1-5:",

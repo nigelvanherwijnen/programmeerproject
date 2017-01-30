@@ -1,13 +1,21 @@
 // Nigel van Herwijnen
 // UvA ID: 10330879
+//
+// File: ghg_list.js
+// Comment: As done by Gregor Aisch on http://bl.ocks.org/gka/17ee676dc59aa752b4e6.
+// Made into a DataTable as seen on http://stackoverflow.com/questions/5990386/datatables-search-box-outside-datatable.
 
-// List (http://bl.ocks.org/gka/17ee676dc59aa752b4e6)
+// This function makes the table containing the ranked countries
 function makeList(list_data, line_data, chart_data, map_data, year) {
 
+  // Set data
   var data = list_data[year]
 
   // Define the way data will be formatted
   var formatValue = d3.format(",.2f");
+
+  // Remove table if already present
+  d3.select("#container_list").selectAll("table").remove();
 
   // Create table
   var table = d3.select("#container_list").append("table")
@@ -27,7 +35,6 @@ function makeList(list_data, line_data, chart_data, map_data, year) {
     .selectAll("th")
     .data(columns).enter()
     .append("th")
-    // .attr("class", function(d) { return d.cl })
     .text(function(d) { return d.head });
 
   // Append the rest of the table
@@ -40,7 +47,7 @@ function makeList(list_data, line_data, chart_data, map_data, year) {
     .selectAll("td")
     .data(function(row, i) {
         return columns.map(function(c) {
-            // NOG EVEN UITZOEKEN HOE DIT PRECIES WERKT
+            // Pick matching data for cell
             var cell = {};
             d3.keys(c).forEach(function(k) {
                 cell[k] = typeof c[k] == "function" ? c[k](row,i) : c[k];
@@ -49,57 +56,24 @@ function makeList(list_data, line_data, chart_data, map_data, year) {
         });
     }).enter()
     .append("td")
+    // Fill cell accordingly
     .html(function(d) { return d.html; })
     .attr("class", function(d) { return d.cl; })
-    .on("click", function(d) { changeGraphs(d.code, list_data, line_data, chart_data, map_data, year); });
-
-
-    // http://stackoverflow.com/questions/5990386/datatables-search-box-outside-datatable
-    var oTable = $('#tableTopEmitters').DataTable({
-      paging: false,
-      "sDom": '<"top">rt<"bottom"lp><"clear">'
+    // Give action on click
+    .on("click", function(d) {
+      updatePieChart(list_data, line_data, chart_data, map_data, year, d.code);
+      makeLineGraph(line_data, year, d.code);
     });
 
-    $('#searchCountry').keyup(function(){
-          oTable.search($(this).val()).draw() ;
-    })
 
+  // Turn table into DataTable without paging and with customized dom
+  var Table = $('#tableTopEmitters').DataTable({
+    paging: false,
+    "sDom": '<"top">rt<"bottom"lp><"clear">'
+  });
 
-};
-
-// When clicking an item, view correct graphs
-function changeGraphs (code, list_data, line_data, chart_data, map_data, year) {
-  // Remove drawn elements that will be redrawn
-  d3.select("#container_chart").select("svg").remove();
-  d3.select("#container_chart").select(".infobox_chart").remove();
-  d3.select("#container_chart").select(".country_name").remove();
-  d3.select("#container_chart").select(".tooltip_chart").remove();
-  d3.select("#container_line").select("svg").remove();
-
-  // Redraw pie chart
-  makePieChart(list_data, line_data, chart_data, map_data, year, code);
-  makeLineGraph(line_data, year, code);
-};
-
-// http://www.w3schools.com/howto/howto_js_filter_table.asp
-function searchTable() {
-  // Declare variables
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("searchCountry");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("tableTopEmitters");
-  tr = table.getElementsByTagName("tr");
-
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      };
-    };
-  };
+  // Link custom search box to table
+  $('#searchCountry').keyup(function(){
+        Table.search($(this).val()).draw() ;
+  });
 };

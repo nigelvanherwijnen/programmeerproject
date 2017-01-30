@@ -1,5 +1,7 @@
 // Nigel van Herwijnen
 // UvA ID: 10330879
+//
+// File: process.js
 
 // Reformat the JSON data as necassery for datamap.
 function processDataMap(data) {
@@ -74,8 +76,6 @@ function processDataChart(data) {
       if (other[d.code].value < 0) { other[d.code].value = 0 };
     });
 
-    // console.log(co2["USA"])
-
     // Save data
     chart_data[i] = [co2, ch4, n2o, other];
   };
@@ -87,17 +87,21 @@ function processDataChart(data) {
 // This function reformats the data for the line chart.
 function processDataLine(data) {
 
+  // Define variable to store data
   var line_data = new Object;
 
+  // Create necassery entries
   data[1990].forEach(function(d) {
     line_data[d.code] = new Object
     line_data[d.code].name = d.name
     line_data[d.code].values = []
   })
 
+  // Loop over every year and entry
   for (i = 1990; i < 2013; i++) {
     data[i].forEach(function(d) {
 
+      // Store data as needed
       line_data[d.code].values.push({
         "year": i,
         "waste": d.waste,
@@ -110,24 +114,32 @@ function processDataLine(data) {
     });
   };
 
+  // Return data
   return line_data;
 };
 
 // This function reformats the data for the top 10 chart.
-// Used: http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file
 function processDataList(data) {
 
+  // Define variable to store data
   var list_data = new Object;
+
+  // Loop over every year
   for (i = 1990; i < 2013; i++) {
 
+    // Sort data
+    // Used: http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file
     var ranked = data[i].sort(function(a, b) { return a.total < b.total ? 1 : -1; });
 
+    // Add item containing rank
     for (j = 0; j < ranked.length; j++) {
       ranked[j]["rank"] = j + 1;
     };
 
+    // Save data
     list_data[i] = ranked;
   };
 
+  // Return data
   return list_data;
 };

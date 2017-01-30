@@ -1,14 +1,25 @@
-// This functions makes a pie chart
-function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
+// Nigel van Herwijnen
+// UvA ID: 10330879
+//
+// File: gas_distribution_pie_chart.js
 
-  // Set data
-  var data = chart_data[year];
-
+// This function initializes the pie chart
+function initPieChart(list_data, line_data, chart_data, map_data, year, code) {
 
   // Set size of SVG and radius of chart
   var width = d3.select("#container_chart")[0][0].clientWidth,
     height = 450,
     radius = Math.min(width, height) / 2;
+
+  // Put the svg on the page
+  var svg = d3.select("#container_chart").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + ((width / 8) + ((height - 100) / 2)) + ")");
+
+  // Set data
+  var data = chart_data[year];
 
   // Define colors to use
   var color = d3.scale.ordinal()
@@ -16,47 +27,24 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
 
   // Calculate the angles of the pie
   var pie = d3.layout.pie()
-      .value(function(d) { return d[code].value; })
-      .sort(null);
+    .value(function(d) { return d[code].value; })
+    .sort(null);
 
   // Define the arcs
   var arc = d3.svg.arc()
-      .innerRadius(radius - 70)
-      .outerRadius(radius - 20);
+    .innerRadius(radius - 70)
+    .outerRadius(radius - 20);
 
-  var arcOver = d3.svg.arc()
-      .innerRadius(0)
-      .outerRadius(radius);
-
-  // Put the svg on the page
-  var svg = d3.select("#container_chart").append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + ((width / 8) + ((height - 50) / 2)) + ")");
 
   // Draw the pie chart
-
-  // http://jsfiddle.net/Nw62g/3/
-  var g = svg.selectAll(".arc")
+  var path = svg.selectAll(".arc")
     .data(pie(data))
-    .enter().append("g")
+    .enter().append("path")
     .attr("class", "arc");
 
-  g.append("path")
-    .attr("fill", function(d, i) { return color(i); })
-  .transition()
-    .ease("sin")
-    .duration(500)
-    .attrTween("d", tweenPie);
-
-  function tweenPie(b) {
-    var i = d3.interpolate({startAngle: 0*Math.PI, endAngle: 0*Math.PI}, b);
-    return function(t) { return arc(i(t)); };
-  };
-
-
-
+  path.attr("fill", function(d, i) { return color(i); })
+    .attr("d", arc)
+    .each(function(d) { this._current = d; });
 
   // Define size of legend squares
   var legendRectSize = 17;
@@ -94,22 +82,11 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
       else if (d == 3) { return "Other (MtCO2e)"; };
     });
 
-  // Write title
-  d3.select("#container_chart").select("svg").append("text")
-    // .attr("font-weight", "bold")
-    .attr("font-size", "20px")
-    // .attr("text-align", "center")
-    .attr("text-anchor", "middle")
-    .attr("transform", "translate(" + width / 2 + "," + 40 + ")")
-    .text("Gas distribution")
-
   // Write country name below title
   d3.select("#container_chart").select("svg").append("text")
-    // .attr("font-weight", "bold")
     .attr("font-size", "16px")
-    // .attr("text-align", "center")
     .attr("text-anchor", "middle")
-    .attr("transform", "translate(" + width / 2 + "," + 70 + ")")
+    .attr("transform", "translate(" + width / 2 + "," + 20 + ")")
     .attr("class", "country_name")
     .text(function(d) { return data[0][code].name + " - " + year; });
 
@@ -125,29 +102,84 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
     .attr("class", "value");
 
   // Show tooltip with content on mouseover
-  // http://jsfiddle.net/qkHK6/505/ for highlight of pie piece
-  g.on("mouseover", function(d) {
+  path.on("mouseover", function(d) {
     tooltip.select(".label_tooltip").html(d.data[code].cat + ":");
     tooltip.select(".value").html(d.data[code].value + " MtCO2e");
     tooltip.style("display", "block");
-    d3.select(this).transition()
-       .duration(1000)
-       .attr("d", arcOver);
   });
 
   // Hide tooltip on mouseout
-  g.on("mouseout", function() {
+  path.on("mouseout", function() {
     tooltip.style("display", "none");
-    d3.select(this).transition()
-       .attr("d", arc)
-       .attr("stroke","none");
   });
 
   // Let the tooltip follow the mouse
-  g.on("mousemove", function(d) {
+  path.on("mousemove", function(d) {
     tooltip.style("top", (d3.event.layerY + 10) + "px")
       .style("left", (d3.event.layerX + 10) + "px");
   });
+
+  // Start listening to the year slider
+  changeSlider(list_data, line_data, chart_data, map_data, year, code);
+};
+
+// This function updates the pie chart when new data is chosen
+function updatePieChart(list_data, line_data, chart_data, map_data, year, code) {
+
+  // Set size of SVG and radius of chart
+  var width = d3.select("#container_chart")[0][0].clientWidth,
+      height = 450,
+      radius = Math.min(width, height) / 2;
+  var svg = d3.select("#container_chart").select("svg").select("g");
+
+  // Set data
+  var data = chart_data[year];
+
+  // Erase country name below title and write the new country name
+  d3.select("#container_chart").select(".country_name").remove();
+  d3.select("#container_chart").select("svg").append("text")
+    .attr("font-size", "16px")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate(" + width / 2 + "," + 20 + ")")
+    .attr("class", "country_name")
+    .text(function(d) { return data[0][code].name + " - " + year; });
+
+  // Define colors to use
+  var color = d3.scale.ordinal()
+    .range(["#7570b3", "#1b9e77", "#d95f02", "#bdbdbd"]);
+
+  // Calculate the angles of the pie
+  var pie = d3.layout.pie()
+    .value(function(d) { return d[code].value; })
+    .sort(null);
+
+  // Define the arcs
+  var arc = d3.svg.arc()
+    .innerRadius(radius - 70)
+    .outerRadius(radius - 20);
+
+  // Select paths and save all the angles, then transition to new data
+  var path = svg.selectAll("path")
+    .each(function(d) { this._current = d; })
+    .data(pie(data))
+    .transition().duration(250).attrTween("d", arcTween);
+
+  // Update slider to new country
+  changeSlider(list_data, line_data, chart_data, map_data, year, code);
+
+  // Store the displayed angles in _current.
+  // Then, interpolate from _current to the new angles.
+  // During the transition, _current is updated in-place by d3.interpolate.
+  // https://bl.ocks.org/mbostock/1346410
+  function arcTween(a) {
+    var i = d3.interpolate(this._current, a);
+    this._current = i(0);
+    return function(t) {  return arc(i(t)); };
+  };
+};
+
+// This function changes the graphs to the corresponding year when slider is used
+function changeSlider(list_data, line_data, chart_data, map_data, year, code) {
 
   // On change on the slider
   d3.select("#year").on("input", function() {
@@ -157,20 +189,14 @@ function makePieChart(list_data, line_data, chart_data, map_data, year, code) {
     d3.select("#year-value").text(year);
     d3.select("#year").property("value", year);
 
-    // Remove all visible things that will be redrawn
-    d3.select("#container_chart").select("svg").remove();
-    d3.select("#container_chart").select(".infobox_chart").remove();
-    d3.select("#container_chart").select(".country_name").remove();
-    d3.select("#container_chart").select(".tooltip_chart").remove();
+    // Remove map
     d3.select("#container_map").select("svg").remove();
     d3.select("#container_map").select(".datamaps-legend").remove();
-    d3.select("#container_list").selectAll("table").remove();
 
     // Redraw
-    makePieChart(list_data, line_data, chart_data, map_data, year, code);
+    updatePieChart(list_data, line_data, chart_data, map_data, year, code);
     makeDataMap(list_data, line_data, chart_data, map_data, year);
     makeList(list_data, line_data, chart_data, map_data, year);
 
   });
-
-};
+}
