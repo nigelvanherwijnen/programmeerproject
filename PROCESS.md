@@ -45,3 +45,12 @@ Now the MVP has been finished, extra components can be made and minor things tha
 In the list, a function within a function has been taken out of scope. Fixed a bug where the table was not updated when using the slider. Tried changing the table to DataTable. The search bar has to be placed correctly and now only a couple of results are shown instead of a scrollable list.
 
 Table is now sortable and all results are shown. The self made search box is now linked to the table and DataTable's search box has been made invisible. Also started on making the pie chart animated.
+
+## Day 18 - 26/01/2017 and day 19 - 27/01/2017
+Tried changing the way the pie chart is being made to make transition animations nicer. A start has been made.
+
+## Day 20 - 28/01/2017 and day 21 - 29/01/2017
+The pie chart now consists of two functions: one that initiates the chart with all the text, legend and data for initial country, and a second function that updates the the data shown in the chart. The transition is now smooth instead of static (YAY!). Furthermore, I cleaned up the way the visualizations were being updated. Erasing the old elements is now the first step inside the functions, which makes the code cleaner.
+
+## Day 22 - 30/01/2017
+Rigorous cleaning up of code (really every file, including splitting css) and starting on final lay-out. Retrieved a Bootstrap template and started adjusting for own use and implementing own elements. Also added a MIT license. 
