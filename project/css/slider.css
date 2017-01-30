@@ -1,0 +1,110 @@
+/* Nigel van Herwijnen
+UvA ID: 10330879
+
+File: slider.css
+Comment: The slider has been made using a slider generator
+that can be found in http://www.cssportal.com/style-input-range/.
+*/
+
+input[type=range] {
+  -webkit-appearance: none;
+  position: relative;
+  margin: 10px 0;
+  width: 100%;
+  bottom: 20px;
+  z-index: 1002;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 7px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 1px #000000;
+  background: #e6ab02;
+  border-radius: 1px;
+  border: 0px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000031;
+  border: 1px solid #00001E;
+  height: 19px;
+  width: 31px;
+  border-radius: 15px;
+  background: #FFFFFF;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6.5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #e6ab02;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 7px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 1px #000000;
+  background: #e6ab02;
+  border-radius: 1px;
+  border: 0px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000031;
+  border: 1px solid #00001E;
+  height: 19px;
+  width: 31px;
+  border-radius: 15px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 7px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #e6ab02;
+  border: 0px solid #010101;
+  border-radius: 2px;
+  box-shadow: 0px 0px 1px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #e6ab02;
+  border: 0px solid #010101;
+  border-radius: 2px;
+  box-shadow: 0px 0px 1px #000000;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000031;
+  border: 1px solid #00001E;
+  height: 19px;
+  width: 31px;
+  border-radius: 15px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #e6ab02;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #e6ab02;
+}
+
+/* Placing and font-size of the label next to the slider */
+label {
+  font-size: 12px;
+  position: relative;
+  bottom: 10px;
+  left: 45%;
+}
+
+/* Set margins */
+.top3 { margin-top:3%; }
+.bottom3 { margin-bottom: 3%; }

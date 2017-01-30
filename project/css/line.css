@@ -1,0 +1,49 @@
+/* Nigel van Herwijnen
+UvA ID: 10330879
+
+File: line.css */
+
+/* Position and size of the line graph */
+.country_line {
+  text-anchor: end;
+  font: 48px arial;
+  font-weight: bold;
+  opacity: 0.1;
+}
+
+/* Styling of the axes */
+.axis text {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+}
+
+/* Styling of the extra information showed on mouseover */
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+.focus text {
+  font: 12px sans-serif;
+  font-weight: normal;
+}
+.city_name {
+  text-anchor: end;
+  font: 56px arial;
+  font-weight: bold;
+  opacity: 0.1;
+}
+
+/* Styling of the legend */
+.legend {
+  font: 12px sans-serif;
+}
+
+/* Styling of the graph line itself */
+.line {
+  fill: none;
+  stroke-width: 1.5px;
+}

@@ -1,0 +1,30 @@
+/* Nigel van Herwijnen
+UvA ID: 10330879
+
+File: gasses.css */
+
+/* General styling of the body */
+body {
+  font-family: sans-serif;
+  margin: auto;
+  position: relative;
+  font-size: 12px;
+}
+
+/* Overwrite Bootstra's h2 tag */
+h2 {
+  font-size: 18px;
+  text-transform: none;
+}
+
+/* Overwrite styling of theme */
+.navbar-brand { font-family: Montserrat !important; }
+.btn-xl {
+  background-color: #a90000 !important;
+  border-color: #a90000 !important;
+}
+.btn-xl:hover {
+  background-color: #9a0000 !important;
+  border-color: #9a0000 !important;
+}
+a { color: #337ab7; }

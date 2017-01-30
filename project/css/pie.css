@@ -1,0 +1,43 @@
+/* Nigel van Herwijnen
+UvA ID: 10330879
+
+File: pie.css */
+
+/* Position and size of the pie chart */
+#container_chart {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+/* Set size of font in legend of pie chart */
+.legend_chart {
+  font-size: 11px;
+}
+
+/* Set CSS foor the tooltip of the pie chart */
+.tooltip_chart {
+  background: #fff;
+  box-shadow: 0 0 5px #999999;
+  color: #333;
+  display: none;
+  font-size: 12px;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  width: 80px;
+  z-index: 10;
+}
+
+/* Lay-out and placing for the text area */
+.infobox_chart {
+  font-size: 13px;
+  left: 0px;
+  padding: 0px;
+  position: absolute;
+  top: 0px;
+  width: 400px;
+  z-index: 10;
+  text-align: justify;
+  text-justify: inter-word;
+}
