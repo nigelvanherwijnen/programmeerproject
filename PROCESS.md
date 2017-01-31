@@ -53,4 +53,7 @@ Tried changing the way the pie chart is being made to make transition animations
 The pie chart now consists of two functions: one that initiates the chart with all the text, legend and data for initial country, and a second function that updates the the data shown in the chart. The transition is now smooth instead of static (YAY!). Furthermore, I cleaned up the way the visualizations were being updated. Erasing the old elements is now the first step inside the functions, which makes the code cleaner.
 
 ## Day 22 - 30/01/2017
-Rigorous cleaning up of code (really every file, including splitting css) and starting on final lay-out. Retrieved a Bootstrap template and started adjusting for own use and implementing own elements. Also added a MIT license. 
+Rigorous cleaning up of code (really every file, including splitting css) and starting on final lay-out. Retrieved a Bootstrap template and started adjusting for own use and implementing own elements. Also added a MIT license.
+
+## Day 23 - 31/01/2017
+Updated readme file.
