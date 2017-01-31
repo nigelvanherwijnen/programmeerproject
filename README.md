@@ -15,8 +15,8 @@ After selecting a country on the world map or in the table, this pie chart will 
 ### Table: top emitters
 A table gives an easy overview of the countries and the total amount of greenhouse gasses being emitted. Initially it is sorted with the greatest emitters on top and the least emitters on the bottom, but by clicking the title this can be switched or sorted alphabetically.
 
-![Alt text](/doc/map_table.jpg)
-![Alt text](/doc/line_pie.jpg)
+![Alt text](/doc/map_table.png)
+![Alt text](/doc/line_pie.png)
 
 ## Data
 Data has been obtained from the World Recourses Institute. This will is converted from CSV to JSON using a python script. The visualizations will be made using JS/D3. This will allow for interactivity and basic styling using HTML and CSS.
