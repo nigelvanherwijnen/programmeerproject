@@ -70,7 +70,7 @@ function processDataChart(data) {
       co2[d.code] = {"value": +formatValue(d.co2), "cat": "CO2", "name": d.name};
       ch4[d.code] = {"value": +formatValue(d.ch4), "cat": "CH4", "name": d.name};
       n2o[d.code] = {"value": +formatValue(d.n2o), "cat": "N2O", "name": d.name};
-      other[d.code] = {"value": +formatValue(d.n2o), "cat": "Other", "name": d.name};
+      other[d.code] = {"value": +formatValue(d.other), "cat": "Other", "name": d.name};
 
       // Rewrite "other" if data overlaps
       if (other[d.code].value < 0) { other[d.code].value = 0 };

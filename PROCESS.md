@@ -57,3 +57,6 @@ Rigorous cleaning up of code (really every file, including splitting css) and st
 
 ## Day 23 - 31/01/2017
 Updated readme file.
+
+## Day 24 - 01/02/2017
+Fixed error where wrong data was shown in tooltip of pie chart. Fixed error where wrong data was shown as "Other" in the pie chart.

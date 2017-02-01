@@ -164,6 +164,17 @@ function updatePieChart(list_data, line_data, chart_data, map_data, year, code) 
     .data(pie(data))
     .transition().duration(250).attrTween("d", arcTween);
 
+  // Define tooltip of and path for pie chart
+  var path_tooltip = svg.selectAll("path");
+  var tooltip = d3.select(".tooltip_chart");
+
+  // Update content shown on tooltip
+  path_tooltip.on("mouseover", function(d) {
+    tooltip.select(".label_tooltip").html(d.data[code].cat + ":");
+    tooltip.select(".value").html(d.data[code].value + " MtCO2e");
+    tooltip.style("display", "block");
+  });
+
   // Update slider to new country
   changeSlider(list_data, line_data, chart_data, map_data, year, code);
 
