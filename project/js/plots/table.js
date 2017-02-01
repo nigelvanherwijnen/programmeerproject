@@ -63,6 +63,7 @@ function makeList(list_data, line_data, chart_data, map_data, year) {
     .on("click", function(d) {
       updatePieChart(list_data, line_data, chart_data, map_data, year, d.code);
       makeLineGraph(line_data, year, d.code);
+      changeSlider(list_data, line_data, chart_data, map_data, year, code);
     });
 
 

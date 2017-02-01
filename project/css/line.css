@@ -30,12 +30,6 @@ File: line.css */
   font: 12px sans-serif;
   font-weight: normal;
 }
-.city_name {
-  text-anchor: end;
-  font: 56px arial;
-  font-weight: bold;
-  opacity: 0.1;
-}
 
 /* Styling of the legend */
 .legend {

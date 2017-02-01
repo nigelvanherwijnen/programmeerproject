@@ -1,5 +1,7 @@
 // Nigel van Herwijnen
 // Uva ID: 10330879
+//
+// File: ghg_datamap.js
 
 // This function draws a datamap viewing given data.
 function makeDataMap(list_data, line_data, chart_data, map_data, year) {
@@ -18,9 +20,10 @@ function makeDataMap(list_data, line_data, chart_data, map_data, year) {
         // Surprise when clicking on USA and Russia
         if (geography.id == "USA" || geography.id == "RUS") { window.open('https://goo.gl/a1N33x', '_blank'); }
 
-        // update pie chart and redraw line graph
+        // update pie chart, redraw line graph and update slider
         makeLineGraph(line_data, year, geography.id);
         updatePieChart(list_data, line_data, chart_data, map_data, year, geography.id);
+        changeSlider(list_data, line_data, chart_data, map_data, year, code);
       });
     },
     scope: "world",

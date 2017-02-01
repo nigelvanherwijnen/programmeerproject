@@ -126,7 +126,7 @@ function makeLineGraph(line_data, year, code) {
       .text(legend_names[i]);
   };
 
-  // Write the name of the city currently active on screen
+  // Write the name of the country currently active on screen
   g.selectAll(".country_line").remove();
   g.append("text")
   .attr("class", "country_line")
@@ -182,7 +182,7 @@ function makeLineGraph(line_data, year, code) {
       d = x0 - d0.year > d1.year - x0 ? d1 : d0;
 
     // Translate the mouseover to the calculated position
-    focus.attr("transform", "translate(" + x(d.year) + "," + 160 + ")");
+    focus.attr("transform", "translate(" + x(d.year) + "," + 180 + ")");
 
     // Set variables to be printed
     var variables_list = ["Industrial", "Energy", "Waste", "Agriculture", "Fuel", "Land-use / Forestry", "Year"];
