@@ -7,7 +7,7 @@
 window.onload = function() {
 
   // Load JSON data, log on error
-  d3.json("data/data_ghg.json", function(error, jsonData) {
+  d3.json("project/data/data_ghg.json", function(error, jsonData) {
     if(error) throw error;
 
     // Format data for chart and map

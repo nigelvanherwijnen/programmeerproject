@@ -20,7 +20,7 @@ function makeLineGraph(line_data, year, code) {
   var graph = d3.select("#container_line").append("svg")
                 .attr("width", total_width)
                 .attr("height", total_height),
-      margin = {top: 20, right: 140, bottom: 50, left: 35},
+      margin = {top: 20, right: 140, bottom: 50, left: 40},
       width = graph.attr("width") - margin.left - margin.right,
       height = graph.attr("height") - margin.top - margin.bottom,
       g = graph.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
